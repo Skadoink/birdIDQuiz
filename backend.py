@@ -5,7 +5,13 @@ from os.path import isfile, join
 import random
 import re
 
-class quizBuilder: 
+class Question:
+    def __init__(self, speccode, image_ID, species_options):
+        self.speccode = speccode
+        self.image_ID = image_ID
+        self.species_options = species_options
+
+class QuizBuilder: 
     def __init__(self, species, num_questions):
         self.species = species
         self.num_questions = num_questions
@@ -22,8 +28,10 @@ class quizBuilder:
         for spec in self.species:
             for i in range(len(onlyfiles)):
                 file = onlyfiles[i]
+                #correct species and up to date
                 if spec in file and str(currentYear) in file:
                     break
+                #correct species but not up to date
                 elif spec in file and str(currentYear) not in file:
                     updateSuccess = self.updateCSV(spec)
                     if updateSuccess:
@@ -43,8 +51,12 @@ class quizBuilder:
 
     def create_questions(self):
         for i in range(self.num_questions):
-            speccode = random.choice(self.species)
+            num_options = min(len(self.species), 4)
+            species_options = random.sample(self.species, num_options)
+            speccode = random.choice(species_options)
             image_ID = self.getRandomImageID(speccode)
+            question = Question(speccode, image_ID, species_options)
+            self.questions.append(question)
 
     def getRandomImageID(self, speccode):
         """
@@ -56,6 +68,6 @@ class quizBuilder:
                     reader = csv.reader(f)
                     data = list(reader)
                     image_ID = random.choice(data)[0]
-                    while image_ID.startswith(" "):
+                    while image_ID.startswith(" "): #if the image ID is caused by a newline in the csv, it will start with a space
                         image_ID = random.choice(data)[0]
                     return image_ID
