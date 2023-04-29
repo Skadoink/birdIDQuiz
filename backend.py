@@ -3,7 +3,8 @@ import datetime
 import os
 from os.path import isfile, join
 import random
-import re
+import urllib.request
+from bs4 import BeautifulSoup
 
 class Question:
     def __init__(self, speccode, image_ID, species_options):
@@ -22,32 +23,33 @@ class QuizBuilder:
         self.create_questions()
 
     def check_CSVs(self):
-        currentYear = datetime.datetime.now().year
-        mypath = "species_CSVs"
-        onlyfiles = [f for f in os.listdir(mypath) if isfile(join(mypath, f)) and f.endswith('.csv')]
+        currentYearMonth = datetime.datetime.now().strftime("%Y-%m")
+        speciesPath = "species_CSVs"
+        onlyfiles = [f for f in os.listdir(speciesPath) if isfile(join(speciesPath, f)) and f.endswith('.csv')]
         for spec in self.species:
-            for i in range(len(onlyfiles)):
-                file = onlyfiles[i]
+            for i, file in enumerate(onlyfiles):
                 #correct species and up to date
-                if spec in file and str(currentYear) in file:
+                if spec in file and str(currentYearMonth) in file:
                     break
                 #correct species but not up to date
-                elif spec in file and str(currentYear) not in file:
-                    updateSuccess = self.updateCSV(spec)
-                    if updateSuccess:
-                        os.remove(join(mypath, file))
-                    break
-                elif i == len(onlyfiles) - 1: #if we've reached the end of the list and haven't found a match
+                elif spec in file and str(currentYearMonth) not in file:
+                    self.updateCSV(spec)
+                    os.remove(join(speciesPath, file))
+                #if we've reached the end of the list and haven't found a match
+                elif i == len(onlyfiles) - 1: 
                     self.updateCSV(spec) 
                 
     def updateCSV(self, spec):
         """
-        Gets the latest images CSV from exporting from the media page of the species.
-        Should effectively click the export button on a page like 
-        https://media.ebird.org/catalog?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo
-        and save the file to the species_CSVs folder.
+        Gets the latest image IDs from the species' media page on eBird and saves it to a CSV file.
         """    
-        return True
+        html_page = urllib.request.urlopen("https://media.ebird.org/catalog?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo&view=list")
+        soup = BeautifulSoup(html_page, "html.parser")
+        images = []
+        for img in soup.findAll('img'):
+            src = img.get('src')
+            if src.startswith("https://cdn.download.ams.birds.cornell.edu/api/v1/asset/"):
+                images.append(src)
 
     def create_questions(self):
         for i in range(self.num_questions):

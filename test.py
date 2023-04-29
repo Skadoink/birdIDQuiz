@@ -5,6 +5,6 @@ html_page = urllib.request.urlopen("https://media.ebird.org/catalog?taxonCode=ma
 soup = BeautifulSoup(html_page, "html.parser")
 images = []
 for img in soup.findAll('img'):
-    print(img.get('src'))
+    images.append(img.get('src'))
 
 print(images)
