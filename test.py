@@ -1,11 +1,10 @@
-import requests
+import urllib.request
+from bs4 import BeautifulSoup
 
-url = "https://media.ebird.org/api/v2/export.csv?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo&birdOnly=true&count=10000"
-session = requests.Session()
-headers ={"cookie": ""}
+html_page = urllib.request.urlopen("https://media.ebird.org/catalog?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo&view=list")
+soup = BeautifulSoup(html_page, "html.parser")
+images = []
+for img in soup.findAll('img'):
+    print(img.get('src'))
 
-r = session.get(url, 
-                 headers=headers)
-
-print(r.content)
-open('testdl.csv', 'wb').write(r.content)
+print(images)
