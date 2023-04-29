@@ -38,6 +38,8 @@ class QuizBuilder:
         speciesPath = "species_CSVs"
         onlyfiles = [f for f in os.listdir(speciesPath) if isfile(join(speciesPath, f)) and f.endswith('.csv')]
         for spec in self.species:
+            if len(onlyfiles) == 0:
+                self.updateCSV(spec)
             for i, file in enumerate(onlyfiles):
                 #correct species and up to date
                 if spec in file and str(currentYearMonth) in file:
@@ -54,14 +56,15 @@ class QuizBuilder:
         """
         Gets the latest image URLs from the species' media page on eBird and saves it to a CSV file.
         """    
-        html_page = urllib.request.urlopen("https://media.ebird.org/catalog?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo&view=list")
+        url = "https://media.ebird.org/catalog?taxonCode="+spec+"&sort=rating_rank_desc&mediaType=photo&view=list"
+        html_page = urllib.request.urlopen(url)
         soup = BeautifulSoup(html_page, "html.parser")
         images = []
         for img in soup.findAll('img'):
             src = img.get('src')
             if src.startswith("https://cdn.download.ams.birds.cornell.edu/api/v1/asset/"):
                 images.append(src)
-        with open(join("species_CSVs", spec + "_" + datetime.datetime.now().strftime("%Y-%m") + ".csv"), 'w') as f:
+        with open(join("species_CSVs", spec + "_" + datetime.datetime.now().strftime("%Y-%m") + ".csv"), 'w', newline='') as f:
             writer = csv.writer(f)
             for image in images:
                 writer.writerow([image])
@@ -80,6 +83,7 @@ class QuizBuilder:
         Gets a random image ID from the CSV file for the given species.
         """
         for file in os.listdir("species_CSVs"):
+            print(file, speccode)
             if speccode in file:
                 with open(join("species_CSVs", file), 'r') as f:
                     reader = csv.reader(f)

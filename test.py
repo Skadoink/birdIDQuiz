@@ -1,10 +1,4 @@
-import urllib.request
-from bs4 import BeautifulSoup
+import backend
 
-html_page = urllib.request.urlopen("https://media.ebird.org/catalog?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo&view=list")
-soup = BeautifulSoup(html_page, "html.parser")
-images = []
-for img in soup.findAll('img'):
-    images.append(img.get('src'))
-
-print(images)
+testBE = backend.QuizBuilder(['magpet1', 'snopet1'], 5)
+print([(q.imageURL, q.speccode, q.species_options) for q in testBE.questions])
