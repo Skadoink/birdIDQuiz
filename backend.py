@@ -41,7 +41,7 @@ class QuizBuilder:
                 
     def updateCSV(self, spec):
         """
-        Gets the latest image IDs from the species' media page on eBird and saves it to a CSV file.
+        Gets the latest image URLs from the species' media page on eBird and saves it to a CSV file.
         """    
         html_page = urllib.request.urlopen("https://media.ebird.org/catalog?taxonCode=magpet1&sort=rating_rank_desc&mediaType=photo&view=list")
         soup = BeautifulSoup(html_page, "html.parser")
@@ -50,6 +50,10 @@ class QuizBuilder:
             src = img.get('src')
             if src.startswith("https://cdn.download.ams.birds.cornell.edu/api/v1/asset/"):
                 images.append(src)
+        with open(join("species_CSVs", spec + "_" + datetime.datetime.now().strftime("%Y-%m") + ".csv"), 'w') as f:
+            writer = csv.writer(f)
+            for image in images:
+                writer.writerow([image])
 
     def create_questions(self):
         for i in range(self.num_questions):
