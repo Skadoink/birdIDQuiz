@@ -7,13 +7,24 @@ import urllib.request
 from bs4 import BeautifulSoup
 
 class Question:
-    def __init__(self, speccode, image_ID, species_options):
+    def __init__(self, speccode, imageURL, species_options):
+        """
+        Creates a question with the given species code, image ID, and species options.
+        @param speccode: species code of the correct answer
+        @param image_ID: image URL of the correct answer
+        @param species_options: list of species codes for the options
+        """
         self.speccode = speccode
-        self.image_ID = image_ID
+        self.imageURL = imageURL
         self.species_options = species_options
 
 class QuizBuilder: 
     def __init__(self, species, num_questions):
+        """
+        Makes a quiz with the given species and number of questions.
+        @param species: list of species codes
+        @param num_questions: number of questions in the quiz
+        """
         self.species = species
         self.num_questions = num_questions
         self.questions = []
@@ -60,11 +71,11 @@ class QuizBuilder:
             num_options = min(len(self.species), 4)
             species_options = random.sample(self.species, num_options)
             speccode = random.choice(species_options)
-            image_ID = self.getRandomImageID(speccode)
-            question = Question(speccode, image_ID, species_options)
+            specImageURL = self.getRandomimageURL(speccode)
+            question = Question(speccode, specImageURL, species_options)
             self.questions.append(question)
 
-    def getRandomImageID(self, speccode):
+    def getRandomimageURL(self, speccode):
         """
         Gets a random image ID from the CSV file for the given species.
         """
@@ -73,7 +84,5 @@ class QuizBuilder:
                 with open(join("species_CSVs", file), 'r') as f:
                     reader = csv.reader(f)
                     data = list(reader)
-                    image_ID = random.choice(data)[0]
-                    while image_ID.startswith(" "): #if the image ID is caused by a newline in the csv, it will start with a space
-                        image_ID = random.choice(data)[0]
-                    return image_ID
+                    imageURL = random.choice(data)[0]
+                    return imageURL
