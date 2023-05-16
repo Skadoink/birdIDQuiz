@@ -19,11 +19,11 @@ def make_dict():
     with open('ebird_taxonomy_v2022.csv', 'r') as f:
         reader = csv.reader(f)
         next(reader)
-        dict = {}
+        names_codes = {}
         for row in reader:
-            if row[1] == "species":
-                dict[row[3]] = row[2]
-    return dict
+            if row[1] == "species": #to exclude other taxonomic levels
+                names_codes[row[3]] = row[2] #common name is key, species code is value
+    return names_codes
 
 def get_species_codes(species):
     """
@@ -31,10 +31,10 @@ def get_species_codes(species):
     @param species: list of species names
     @return: list of species codes
     """
-    dict = make_dict()
+    names_codes = make_dict()
     species_codes = []
     for spec in species:
-        species_codes.append(dict[spec])
+        species_codes.append(names_codes[spec])
     return species_codes
 
 codes = get_species_codes(["Gray-hooded Warbler"])
