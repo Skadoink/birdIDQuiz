@@ -35,8 +35,10 @@ class QuizBuilder:
 
     def check_CSVs(self):
         currentYearMonth = datetime.datetime.now().strftime("%Y-%m")
-        speciesPath = "species_CSVs"
-        onlyfiles = [f for f in os.listdir(speciesPath) if isfile(join(speciesPath, f)) and f.endswith('.csv')]
+        species_path = "species_CSVs"
+        if not os.path.exists(species_path):
+            os.makedirs(species_path)
+        onlyfiles = [f for f in os.listdir(species_path) if isfile(join(species_path, f)) and f.endswith('.csv')]
         for spec in self.species:
             if len(onlyfiles) == 0:
                 self.updateCSV(spec)
@@ -47,7 +49,7 @@ class QuizBuilder:
                 #correct species but not up to date
                 elif spec in file and str(currentYearMonth) not in file:
                     self.updateCSV(spec)
-                    os.remove(join(speciesPath, file))
+                    os.remove(join(species_path, file))
                 #if we've reached the end of the list and haven't found a match
                 elif i == len(onlyfiles) - 1: 
                     self.updateCSV(spec) 
