@@ -52,26 +52,46 @@ function addSpecies(species) {
     selectedSpeciesDiv.appendChild(speciesItem);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Rest of your existing code here...
+// Function to remove a species from the selectedSpecies array and update the display
+function removeSpecies(species) {
+    const index = selectedSpecies.indexOf(species);
+    if (index !== -1) {
+        selectedSpecies.splice(index, 1);
+        const selectedSpeciesDiv = document.getElementById('selectedSpecies');
+        selectedSpeciesDiv.removeChild(selectedSpeciesDiv.childNodes[index]);
+    }
+}
 
-    // Add event listener to the form submission
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Get the number of questions and perform further actions...
-        const numQuestionsInput = document.getElementById('num_questions');
-        const numQuestions = parseInt(numQuestionsInput.value);
-        // Rest of your logic to handle quiz start and species selection...
-    });
+// Rest of your existing code...
 
-    // Event listener for species selection
-    const speciesInput = document.getElementById('speciesInput');
-    speciesInput.addEventListener('change', function() {
-        const selectedSpecies = speciesInput.value;
-        if (selectedSpecies.trim() !== '') {
-            addSpecies(selectedSpecies);
-            speciesInput.value = '';
-        }
-    });
+// Add event listener to the form submission
+const form = document.querySelector('form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Get the number of questions and perform further actions...
+    const numQuestionsInput = document.getElementById('num_questions');
+    const numQuestions = parseInt(numQuestionsInput.value);
+    // Rest of your logic to handle quiz start and species selection...
+});
+
+// Event listener for species addition
+const addSpeciesButton = document.getElementById('addSpeciesButton');
+addSpeciesButton.addEventListener('click', function() {
+  const inputSpecies = speciesInput.value.trim();
+  if (inputSpecies !== '' && Array.from(speciesList.options).map(option => option.value).includes(inputSpecies) && !selectedSpecies.includes(inputSpecies)) {
+    addSpecies(inputSpecies);
+    speciesInput.value = '';
+  }
+  console.log(Array.from(speciesList.options).map(option => option.value));
+});
+
+
+// Event listener for species removal
+const selectedSpeciesDiv = document.getElementById('selectedSpecies');
+selectedSpeciesDiv.addEventListener('click', function(event) {
+    const speciesItem = event.target;
+    if (speciesItem.tagName === 'DIV') {
+        const species = speciesItem.textContent;
+        removeSpecies(species);
+    }
 });
