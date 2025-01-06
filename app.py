@@ -5,7 +5,9 @@ app = Flask(__name__, static_folder='static')
 app.config['STATIC_FOLDER'] = 'static'
 
 # Define your routes and views here
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+@app.route("/home")
+@app.route("/index")
 def home():
     if request.method == "POST":
         species = request.form.get("species")
