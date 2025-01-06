@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Quiz - Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Bird Quiz</h1>
+    </header>
+    <main>
+        <div class="quiz-container">
+            <div class="question">
+                <p>Which bird is shown in this image?</p>
+            </div>
+            <div class="image-container">
+                <img src="bird.jpg" alt="Bird Image" style="max-width:100%; border-radius: 5px;">
+            </div>
+            <ul class="options">
+                <li><button>Option 1</button></li>
+                <li><button>Option 2</button></li>
+                <li><button>Option 3</button></li>
+                <li><button>Option 4</button></li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Quiz - Answer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Bird Quiz</h1>
+    </header>
+    <main>
+        <div class="quiz-container">
+            <div class="question">
+                <p>Your answer was <span style="color: green; font-weight: bold;">Correct!</span></p>
+                <!-- Replace the above line with the one below if the answer is wrong -->
+                <!-- <p>Your answer was <span style="color: red; font-weight: bold;">Incorrect!</span></p> -->
+            </div>
+            <div class="answer">
+                <p>The correct answer is: <strong>Bird Name</strong></p>
+            </div>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </main>
+    <script>
+        function nextQuestion() {
+            // Redirect to the next question page
+            window.location.href = 'question.html';
+        }
+    </script>
+</body>
+</html>
