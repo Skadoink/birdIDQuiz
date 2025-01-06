@@ -34,6 +34,9 @@ class QuizBuilder:
         self.create_questions()
 
     def check_CSVs(self):
+        """
+        Checks if the CSV files for the species are up to date. If not, updates them.
+        """
         currentYearMonth = datetime.datetime.now().strftime("%Y-%m")
         species_path = "species_CSVs"
         if not os.path.exists(species_path):
@@ -49,7 +52,7 @@ class QuizBuilder:
                 #correct species but not up to date
                 elif spec in file and str(currentYearMonth) not in file:
                     self.updateCSV(spec)
-                    os.remove(join(species_path, file))
+                    os.remove(join(species_path, file)) #TODO should only do this if the update is successful
                 #if we've reached the end of the list and haven't found a match
                 elif i == len(onlyfiles) - 1: 
                     self.updateCSV(spec) 
@@ -57,6 +60,7 @@ class QuizBuilder:
     def updateCSV(self, spec):
         """
         Gets the latest image URLs from the species' media page on eBird and saves it to a CSV file.
+        @param spec: species code
         """    
         url = "https://media.ebird.org/catalog?taxonCode="+spec+"&sort=rating_rank_desc&mediaType=photo&view=list"
         html_page = urllib.request.urlopen(url)
@@ -64,7 +68,7 @@ class QuizBuilder:
         images = []
         for img in soup.findAll('img'):
             src = img.get('src')
-            if src.startswith("https://cdn.download.ams.birds.cornell.edu/api/v1/asset/"):
+            if src.startswith("https://cdn.download.ams.birds.cornell.edu/api/v2/asset/"):
                 images.append(src)
         with open(join("species_CSVs", spec + "_" + datetime.datetime.now().strftime("%Y-%m") + ".csv"), 'w', newline='') as f:
             writer = csv.writer(f)
@@ -72,6 +76,9 @@ class QuizBuilder:
                 writer.writerow([image])
 
     def create_questions(self):
+        """
+        Creates the questions for the quiz.
+        """
         for i in range(self.num_questions):
             num_options = min(len(self.species), 4)
             species_options = random.sample(self.species, num_options)
@@ -83,6 +90,7 @@ class QuizBuilder:
     def getRandomimageURL(self, speccode):
         """
         Gets a random image ID from the CSV file for the given species.
+        @param speccode: species code
         """
         for file in os.listdir("species_CSVs"):
             print(file, speccode)
