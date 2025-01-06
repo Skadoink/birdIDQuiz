@@ -1,0 +1,13 @@
+beautifulsoup4 @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/beautifulsoup4-split_1729039630198/work
+blinker @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/blinker_1729040606648/work
+click @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/click_1729040674118/work
+colorama @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/colorama_1729036581634/work
+Flask @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/flask_1729043854102/work
+itsdangerous @ file:///C:/Users/dev-admin/buildout/croot/itsdangerous_1732929022589/work
+Jinja2 @ file:///C:/b/abs_ddyeze2h6_/croot/jinja2_1730903330414/work
+MarkupSafe @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/markupsafe_1729039103656/work
+setuptools==75.1.0
+soupsieve @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/soupsieve_1729039543636/work
+waitress==3.0.2
+Werkzeug @ file:///C:/Users/dev-admin/buildout/perseverance-python-buildout/croot/werkzeug_1731712504102/work
+wheel==0.44.0
