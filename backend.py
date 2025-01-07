@@ -79,7 +79,7 @@ class QuizBuilder:
         """
         Creates the questions for the quiz.
         """
-        for i in range(self.num_questions):
+        for _ in range(self.num_questions):
             num_options = min(len(self.species), 4)
             species_options = random.sample(self.species, num_options)
             speccode = random.choice(species_options)
