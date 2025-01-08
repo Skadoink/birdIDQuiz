@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bird Quiz - Question</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>Quiz Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <h1>Bird Quiz</h1>
+        <h1>Bird Identification Quiz</h1>
     </header>
     <main>
         <div class="quiz-container">
+            <h2>Question {{ current_question_index }} of {{ num_questions }}</h2>
+
             <div class="question">
-                <p>Which bird is shown in this image?</p>
+                <img src="{{ image_url }}" alt="Bird Image" class="question-image" style="max-width: 100%; height: auto;">
+                <p>What is the name of this bird?</p>
             </div>
-            <div class="image-container">
-                <img src="bird.jpg" alt="Bird Image" style="max-width:100%; border-radius: 5px;">
-            </div>
-            <ul class="options">
-                <li><button>Option 1</button></li>
-                <li><button>Option 2</button></li>
-                <li><button>Option 3</button></li>
-                <li><button>Option 4</button></li>
-            </ul>
+
+            <form method="POST" action="{{ url_for('question') }}">
+                <ul class="options">
+                    {% for option in options %}
+                        <li><!-- radio button - option is the species code but we want to display the common name -->
+                            <input type="radio" name="option" value="{{ option.species_code }}" required> {{ option.species_name }} 
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="submit">Submit Answer</button>
+            </form>
         </div>
     </main>
 </body>
