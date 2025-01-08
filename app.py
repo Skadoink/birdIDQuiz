@@ -36,8 +36,10 @@ def question():
     current_question = quiz.get_current_question()
     return render_template(
         'question.html',
+        current_question_index=quiz.current_question_index + 1,
+        num_questions=quiz.num_questions,
         image_url=current_question.image_url,
-        options=current_question.options
+        options=current_question.species_options
     )
 
 @app.route('/quiz_end')
