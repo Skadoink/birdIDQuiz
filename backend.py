@@ -7,7 +7,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 
 class Question:
-    def __init__(self, speccode, imageURL, species_options):
+    def __init__(self, speccode, image_URL, species_options):
         """
         Creates a question with the given species code, image ID, and species options.
         @param speccode: species code of the correct answer
@@ -15,9 +15,16 @@ class Question:
         @param species_options: list of species codes for the options
         """
         self.speccode = speccode
-        self.imageURL = imageURL
-        self.species_options = species_options
-
+        self.image_URL = image_URL
+        #get common names from csv using speccode
+        species_csv = csv.reader(open('species.csv', 'r'))
+        self.species_options = [] #list of dictionaries with species code and common name
+        for row in species_csv:
+            if row[0] in species_options:
+                self.species_options.append({"species_code": row[0],"common_name": row[1]})
+            if len(self.species_options) == len(species_options):
+                break
+            
 class QuizBuilder: 
     def __init__(self, species, num_questions):
         """
