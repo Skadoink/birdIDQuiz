@@ -32,6 +32,7 @@ class QuizBuilder:
         self.correct_answers = []
         self.check_CSVs()
         self.create_questions()
+        self.current_question_index = 0
 
     def check_CSVs(self):
         """
@@ -100,3 +101,10 @@ class QuizBuilder:
                     data = list(reader)
                     imageURL = random.choice(data)[0]
                     return imageURL
+
+    def get_current_question(self):
+        return self.questions[self.current_question_index]
+
+    def next_question(self):
+        self.current_question_index += 1
+        return self.current_question_index < len(self.questions)
