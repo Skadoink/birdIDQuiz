@@ -10,6 +10,8 @@ app.config['STATIC_FOLDER'] = 'static'
 # Define your routes and views here
 @app.route("/")
 def home():
+    global quiz
+    
     if request.method == "POST":
         species = request.form.get("species")
         num_questions = int(request.form.get("num_questions"))
@@ -24,7 +26,7 @@ def question():
         selected_option = request.form['option']
         current_question = quiz.get_current_question()
 
-        is_correct = selected_option == current_question.correct_answer
+        is_correct = selected_option == current_question.correct_answer #TODO: need to use species code instead of species name?
 
         if not quiz.next_question():
             return redirect(url_for('quiz_end'))
