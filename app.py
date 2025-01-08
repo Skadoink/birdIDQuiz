@@ -8,17 +8,17 @@ app = Flask(__name__, static_folder='static')
 app.config['STATIC_FOLDER'] = 'static'
 
 # Define your routes and views here
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
     global quiz
     
-    if request.method == "POST":
-        species = request.form.get("species")
-        num_questions = int(request.form.get("num_questions"))
-        # Process the user input and start the quiz
-        quiz = QuizBuilder(species, num_questions)
-        return redirect(url_for('question'))
-    return render_template("index.html")
+    if request.method == "POST" and request.form.get("submitButton"):
+            species = request.form.get("species")
+            num_questions = int(request.form.get("num_questions"))
+            # Process the user input and start the quiz
+            quiz = QuizBuilder(species, num_questions)
+            return redirect(url_for('question'))
+    # return render_template("index.html")
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():
@@ -38,7 +38,7 @@ def question():
         'question.html',
         current_question_index=quiz.current_question_index + 1,
         num_questions=quiz.num_questions,
-        image_url=current_question.image_url,
+        image_url=current_question.image_URL,
         options=current_question.species_options
     )
 
