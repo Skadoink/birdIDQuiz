@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request, url_for
 from waitress import serve
 from backend import Question, QuizBuilder
 
-quiz = QuizBuilder(["snopet1"], 1)
+quiz = QuizBuilder(["Snow Petrel"], 1)
 
 app = Flask(__name__, static_folder='static')
 app.config['STATIC_FOLDER'] = 'static'
@@ -13,10 +13,12 @@ def home():
     global quiz
     
     if request.method == "POST" and request.form.get("submitButton"):
-            species = request.form.get("species")
+            selected_species = request.form.get("selectedSpecies")
             num_questions = int(request.form.get("num_questions"))
+            # Convert the string to a list
+            species_list = selected_species.split(',')
             # Process the user input and start the quiz
-            quiz = QuizBuilder(species, num_questions)
+            quiz = QuizBuilder(species_list, num_questions)
             return redirect(url_for('question'))
     addspecbutton = (request.form.get('addSpeciesButton'))
     print(addspecbutton)

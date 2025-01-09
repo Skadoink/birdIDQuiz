@@ -12,34 +12,43 @@ class Question:
         Creates a question with the given species code, image ID, and species options.
         @param speccode: species code of the correct answer
         @param image_ID: image URL of the correct answer
-        @param species_options: list of species codes for the options
+        @param species_options: list of dicts of species codes and names for the options
         """
         self.speccode = speccode
         self.image_URL = image_URL
-        #get common names from csv using speccode
-        species_csv = csv.reader(open('species.csv', 'r'))
-        self.species_options = [] #list of dictionaries with species code and common name
-        for row in species_csv:
-            if row[0] in species_options:
-                self.species_options.append({"species_code": row[0],"common_name": row[1]})
-            if len(self.species_options) == len(species_options):
-                break
+        self.species_options = species_options
             
 class QuizBuilder: 
-    def __init__(self, species, num_questions):
+    def __init__(self, species_names, num_questions):
         """
         Makes a quiz with the given species and number of questions.
-        @param species: list of species codes
+        @param species: list of species names
         @param num_questions: number of questions in the quiz
         """
-        self.species = species
+        self.species_names = species_names
         self.num_questions = num_questions
         self.questions = []
         self.given_answers = []
         self.correct_answers = []
+        self.species, self.species_codes = self.find_spec_codes()
         self.check_CSVs()
         self.create_questions()
         self.current_question_index = 0
+
+    def find_spec_codes(self):
+        """
+        Makes a dictionary of species codes and names.
+        """
+        species_csv = csv.reader(open('species.csv', 'r'))
+        species_codes = [] #list of species codes
+        species = [] #list of dictionaries with species code and common name
+        for row in species_csv:
+            if row[1] in self.species_names:
+                species_codes.append(row[0])
+                species.append({"species_code": row[0],"common_name": row[1]})
+            if len(self.species_names) == len(species):
+                break
+        return species, species_codes
 
     def check_CSVs(self):
         """
@@ -50,7 +59,7 @@ class QuizBuilder:
         if not os.path.exists(species_path):
             os.makedirs(species_path)
         onlyfiles = [f for f in os.listdir(species_path) if isfile(join(species_path, f)) and f.endswith('.csv')]
-        for spec in self.species:
+        for spec in self.species_codes:
             if len(onlyfiles) == 0:
                 self.updateCSV(spec)
             for i, file in enumerate(onlyfiles):
@@ -90,7 +99,7 @@ class QuizBuilder:
         for _ in range(self.num_questions):
             num_options = min(len(self.species), 4)
             species_options = random.sample(self.species, num_options)
-            speccode = random.choice(species_options)
+            speccode = random.choice(species_options)["species_code"]
             specImageURL = self.getRandomimageURL(speccode)
             question = Question(speccode, specImageURL, species_options)
             self.questions.append(question)

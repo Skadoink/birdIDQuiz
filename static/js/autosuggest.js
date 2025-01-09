@@ -50,6 +50,8 @@ function addSpecies(species) {
     const speciesItem = document.createElement('div');
     speciesItem.textContent = species;
     selectedSpeciesDiv.appendChild(speciesItem);
+    // Update the hidden input with the array as a comma-separated string
+    document.getElementById('selectedSpeciesInput').value = selectedSpecies.join(',');
 }
 
 // Function to remove a species from the selectedSpecies array and update the display
