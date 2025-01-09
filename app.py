@@ -18,7 +18,11 @@ def home():
             # Process the user input and start the quiz
             quiz = QuizBuilder(species, num_questions)
             return redirect(url_for('question'))
-    # return render_template("index.html")
+    addspecbutton = (request.form.get('addSpeciesButton'))
+    print(addspecbutton)
+    if request.method == "POST" and request.form.get("addSpeciesButton") != None: 
+        return redirect(request.referrer)
+    return render_template("index.html")
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():

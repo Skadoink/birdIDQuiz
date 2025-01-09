@@ -64,15 +64,15 @@ function removeSpecies(species) {
 
 // Rest of your existing code...
 
-// Add event listener to the form submission
-const form = document.querySelector('form');
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Get the number of questions and perform further actions...
-    const numQuestionsInput = document.getElementById('num_questions');
-    const numQuestions = parseInt(numQuestionsInput.value);
-    // Rest of your logic to handle quiz start and species selection...
-});
+// // Add event listener to the form submission
+// const form = document.querySelector('form');
+// form.addEventListener('submit', function(event) {
+//     event.preventDefault();
+//     // Get the number of questions and perform further actions...
+//     const numQuestionsInput = document.getElementById('num_questions');
+//     const numQuestions = parseInt(numQuestionsInput.value);
+//     // Rest of your logic to handle quiz start and species selection...
+// });
 
 // Event listener for species addition
 const addSpeciesButton = document.getElementById('addSpeciesButton');

@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/fuzzysort@2.0.4/fuzzysort.min.js"></script>
-    <script src="{{ url_for('static', filename='js/autosuggest.js') }}"></script>
     <h1>Bird Quiz</h1>
     <form method="POST" action="/">
         <label for="species">Bird Species:</label>
         <input type="text" id="speciesInput" list="speciesList" placeholder="Enter species name">
         <datalist type="list" id="speciesList"></datalist>
-        <button id="addSpeciesButton">Add</button>
+        <button id="addSpeciesButton" type="button" name="addSpeciesButton">Add</button>
         <div id="selectedSpecies"  style="margin-top: 10px; margin-bottom: 10px;"></div>
         <label for="num_questions">Number of Questions:</label>
         <input type="number" id="num_questions" name="num_questions" max="50" min="1" value="20"><br><br>
@@ -22,3 +20,6 @@
     </form>    
 </body>
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/fuzzysort@2.0.4/fuzzysort.min.js"></script>
+<script src="{{ url_for('static', filename='js/autosuggest.js') }}"></script>
