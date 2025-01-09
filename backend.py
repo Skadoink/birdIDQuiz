@@ -45,7 +45,7 @@ class QuizBuilder:
         for row in species_csv:
             if row[1] in self.species_names:
                 species_codes.append(row[0])
-                species.append({"species_code": row[0],"common_name": row[1]})
+                species.append({"species_code": row[0],"species_name": row[1]})
             if len(self.species_names) == len(species):
                 break
         return species, species_codes

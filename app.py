@@ -32,17 +32,17 @@ def question():
         selected_option = request.form['option']
         current_question = quiz.get_current_question()
 
-        is_correct = selected_option == current_question.correct_answer #TODO: need to use species code instead of species name?
+        is_correct = selected_option == current_question.speccode
 
         if not quiz.next_question():
             return redirect(url_for('quiz_end'))
 
-        return render_template('answer.html', is_correct=is_correct, correct_answer=current_question.correct_answer)
+        return render_template('answer.html', is_correct=is_correct, correct_answer=current_question.speccode)
 
     current_question = quiz.get_current_question()
     return render_template(
         'question.html',
-        current_question_index=quiz.current_question_index + 1,
+        current_question_index=quiz.current_question_index + 1, 
         num_questions=quiz.num_questions,
         image_url=current_question.image_URL,
         options=current_question.species_options
