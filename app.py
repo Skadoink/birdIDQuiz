@@ -34,9 +34,6 @@ def question():
 
         is_correct = selected_option == current_question.speccode
 
-        if not quiz.next_question():
-            return redirect(url_for('quiz_end'))
-
         return render_template('answer.html', current_question_index=quiz.current_question_index, 
             num_questions=quiz.num_questions,
             is_correct=is_correct, 
