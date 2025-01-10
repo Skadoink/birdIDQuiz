@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Answer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+
+    <style>
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <h1>Bird Quiz</h1>
@@ -14,22 +27,28 @@
         <div class="quiz-container">
             <h2>Question {{ current_question_index }} of {{ num_questions }}</h2>
 
-            <div class="answer">
-                <p>Your answer was <span style="color: green; font-weight: bold;">Correct!</span></p>
-                <!-- Replace the above line with the one below if the answer is wrong -->
-                <!-- <p>Your answer was <span style="color: red; font-weight: bold;">Incorrect!</span></p> -->
+            <div class="quiz-container">
+                {% if is_correct %}
+                <p class="correct">Your answer was correct! </p>
+                {% else %}
+                <p class="incorrect">Your answer was incorrect!</p>
+                {% endif %}
+
+                <p>The correct answer was: <strong>{{ correct_answer }}</strong></p>
+
+                {{ embed_url }}
+                <iframe src="https://macaulaylibrary.org/asset/199673391/embed" height="507" width="600" frameborder="0" allowfullscreen></iframe>
+
+                {% if current_question_index == num_questions %}
+                    <form action="{{ url_for('quiz_end') }}" method="GET">
+                        <button type="submit">Finish</button>
+                    </form>
+                {% else %}
+                    <form action="{{ url_for('question') }}" method="GET">
+                        <button type="submit">Next Question</button>
+                    </form>
+                {% endif %}
             </div>
-            <div class="answer">
-                <p>The correct answer is: <strong>Bird Name</strong></p>
-            </div>
-            <button onclick="nextQuestion()">Next Question</button>
-        </div>
-    </main>
-    <script>
-        function nextQuestion() {
-            // Redirect to the next question page
-            window.location.href = 'question.html';
-        }
-    </script>
 </body>
+
 </html>

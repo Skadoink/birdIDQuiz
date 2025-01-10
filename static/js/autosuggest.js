@@ -95,3 +95,4 @@ selectedSpeciesDiv.addEventListener('click', function(event) {
         removeSpecies(species);
     }
 });
+

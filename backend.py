@@ -17,6 +17,18 @@ class Question:
         self.speccode = speccode
         self.image_URL = image_URL
         self.species_options = species_options
+        self.spec_name = [d['species_name'] for d in species_options if d['species_code'] == speccode][0] #get the name of the species with the correct code
+        self.embed_URL = self.get_embed_URL(image_URL)
+        
+    def get_embed_URL(self, image_URL):
+        """
+        Gets the embed URL for the image.
+        @param image_URL: URL of the image
+        """
+        image_ID = image_URL.split("/")[-2]
+        embed_URL = '<iframe src="https://macaulaylibrary.org/asset/'+image_ID+'/embed" frameborder="0" allowfullscreen></iframe>'
+        # embed_URL = '<iframe src="https://macaulaylibrary.org/asset/'+image_ID+'/embed" height="507" width="640" frameborder="0" allowfullscreen></iframe>'
+        return embed_URL
             
 class QuizBuilder: 
     def __init__(self, species_names, num_questions):
