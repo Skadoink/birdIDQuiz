@@ -33,6 +33,8 @@ def question():
         current_question = quiz.get_current_question()
 
         is_correct = selected_option == current_question.speccode
+        if is_correct:
+            quiz.correct_answers+=1
         
         quiz.next_question()
 
@@ -53,16 +55,16 @@ def question():
     
 @app.route('/answer', methods=['GET', 'POST'])
 def answer():
-    if request.method == 'POST' and request.form.get("endButton"):
+    if request.method == 'POST' and request.form.get("endButton") != None:
         return render_template(
             'quiz_end.html', 
             correct_answers=quiz.correct_answers,
             num_questions=quiz.num_questions)
-    return redirect(url_for('question'))
+    return redirect(url_for('quiz_end'))
 
-# @app.route('/quiz_end')
-# def quiz_end():
-#     return render_template('quiz_end.html')
+@app.route('/quiz_end')
+def quiz_end():
+    return render_template('quiz_end.html')
 
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=8000)

@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz End</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Quiz Completed!</h1>
         <p>Thank you for participating in the bird identification quiz.</p>
-        <p>Your score: {{ correct_questions }}/{{ num_questions }}</p>
-        <a href="/" class="btn">Home</a>
+        <p>Your score: {{ correct_answers }}/{{ num_questions }}</p>
+        <form action="/" method="GET">
+            <button type="submit">Home</button>
+        </form>
     </div>
 </body>
 </html>

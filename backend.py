@@ -41,7 +41,7 @@ class QuizBuilder:
         self.num_questions = num_questions
         self.questions = []
         self.given_answers = []
-        self.correct_answers = []
+        self.correct_answers = 0
         self.species, self.species_codes = self.find_spec_codes()
         self.check_CSVs()
         self.create_questions()
