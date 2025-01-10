@@ -33,6 +33,8 @@ def question():
         current_question = quiz.get_current_question()
 
         is_correct = selected_option == current_question.speccode
+        
+        quiz.next_question()
 
         return render_template('answer.html', current_question_index=quiz.current_question_index, 
             num_questions=quiz.num_questions,
