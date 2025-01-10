@@ -1,4 +1,4 @@
-fetch('/static/species.csv')
+fetch('/static/species2.csv')
   .then(response => response.text())
   .then(csvData => {
     const rows = csvData.split('\n');

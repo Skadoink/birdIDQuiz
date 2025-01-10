@@ -51,7 +51,7 @@ class QuizBuilder:
         """
         Makes a dictionary of species codes and names.
         """
-        species_csv = csv.reader(open('species.csv', 'r'))
+        species_csv = csv.reader(open('/static/species2.csv', 'r'))
         species_codes = [] #list of species codes
         species = [] #list of dictionaries with species code and common name
         for row in species_csv:
