@@ -64,8 +64,6 @@ function removeSpecies(species) {
     }
 }
 
-// Rest of your existing code...
-
 // // Add event listener to the form submission
 // const form = document.querySelector('form');
 // form.addEventListener('submit', function(event) {
