@@ -22,7 +22,7 @@ def home():
             return redirect(url_for('question'))
     addspecbutton = (request.form.get('addSpeciesButton'))
     print(addspecbutton)
-    if request.method == "POST" and request.form.get("addSpeciesButton") != None: 
+    if request.method == "POST" and request.form.get("addSpeciesButton") != None:  #needed?
         return redirect(request.referrer)
     return render_template("index.html")
 
@@ -48,10 +48,19 @@ def question():
         image_url=current_question.image_URL,
         options=current_question.species_options
     )
+    
+@app.route('/answer', methods=['GET', 'POST'])
+def answer():
+    if request.method == 'POST' and request.form.get("endButton"):
+        return render_template(
+            'quiz_end.html', 
+            correct_answers=quiz.correct_answers,
+            num_questions=quiz.num_questions)
+    return redirect(url_for('question'))
 
-@app.route('/quiz_end')
-def quiz_end():
-    return render_template('quiz_end.html')
+# @app.route('/quiz_end')
+# def quiz_end():
+#     return render_template('quiz_end.html')
 
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=8000)

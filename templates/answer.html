@@ -44,8 +44,8 @@
                 </iframe>
 
                 {% if current_question_index == num_questions %}
-                    <form action="{{ url_for('quiz_end') }}" method="GET">
-                        <button type="submit">Finish</button>
+                    <form method="POST">
+                        <button type="submit" name="endButton">Finish</button>
                     </form>
                 {% else %}
                     <form action="{{ url_for('question') }}" method="GET">
