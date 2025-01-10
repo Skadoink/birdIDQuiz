@@ -40,7 +40,8 @@ def question():
         return render_template('answer.html', current_question_index=quiz.current_question_index, 
             num_questions=quiz.num_questions,
             is_correct=is_correct, 
-            correct_answer=current_question.spec_name)
+            correct_answer=current_question.spec_name,
+            embed_url=current_question.embed_URL)
 
     current_question = quiz.get_current_question()
     return render_template(
@@ -48,8 +49,7 @@ def question():
         current_question_index=quiz.current_question_index + 1, 
         num_questions=quiz.num_questions,
         image_url=current_question.image_URL,
-        options=current_question.species_options,
-        embed_url=current_question.embed_URL
+        options=current_question.species_options
     )
 
 @app.route('/quiz_end')

@@ -26,7 +26,7 @@ class Question:
         @param image_URL: URL of the image
         """
         image_ID = image_URL.split("/")[-2]
-        embed_URL = '<iframe src="https://macaulaylibrary.org/asset/'+image_ID+'/embed" frameborder="0" allowfullscreen></iframe>'
+        embed_URL = "https://macaulaylibrary.org/asset/"+image_ID+"/embed" 
         # embed_URL = '<iframe src="https://macaulaylibrary.org/asset/'+image_ID+'/embed" height="507" width="640" frameborder="0" allowfullscreen></iframe>'
         return embed_URL
             
