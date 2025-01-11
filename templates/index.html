@@ -10,7 +10,7 @@
 
 <body>
     <h1>Bird Quiz</h1>
-    <form method="POST" action="/" onkeydown="return event.key != 'Enter';">
+    <form method="POST" action="/" onkeydown="return event.key != 'Enter';"> <!-- find a more accessibility friendly solution -->
         <label for="species">Bird Species:</label>
         <input type="text" id="speciesInput" list="speciesList" placeholder="Enter species name">
         <datalist type="list" id="speciesList"></datalist>
