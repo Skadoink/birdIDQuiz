@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Question</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
+
 <body>
     <header>
         <h1>Bird Quiz</h1>
@@ -15,17 +17,19 @@
             <h2>Question {{ current_question_index }} of {{ num_questions }}</h2>
 
             <div class="question">
-                <img src="{{ image_url }}" alt="Bird Image" class="question-image" style="max-width: 100%; height: auto;">
+                <img src="{{ image_url }}" alt="Bird Image" class="question-image"
+                    style="max-width: 100%; height: auto;">
                 <p>What is the name of this bird?</p>
             </div>
 
             <form method="POST" action="{{ url_for('question') }}">
                 <ul class="options">
                     {% for option in options %}
-                        <li><!-- radio button - option is the species code and name as a dict -->
-                            
-                            <input type="radio" name="option" value="{{ option.species_code }}" required> {{ option.species_name }} 
-                        </li>
+                    <li><!-- radio button - option is the species code and name as a dict -->
+
+                        <input type="radio" name="option" value="{{ option.species_code }}" required> {{
+                        option.species_name }}
+                    </li>
                     {% endfor %}
                 </ul>
                 <button type="submit">Submit Answer</button>
@@ -33,4 +37,5 @@
         </div>
     </main>
 </body>
+
 </html>

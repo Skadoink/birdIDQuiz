@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bird Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
+
 <body>
     <h1>Bird Quiz</h1>
     <form method="POST" action="/">
@@ -19,8 +21,9 @@
         <label for="num_questions">Number of Questions:</label>
         <input type="number" id="num_questions" name="num_questions" max="50" min="1" value="20"><br><br>
         <input type="submit" name="submitButton" value="Start Quiz">
-    </form>    
+    </form>
 </body>
+
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/fuzzysort@2.0.4/fuzzysort.min.js"></script>

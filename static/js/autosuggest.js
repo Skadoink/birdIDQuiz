@@ -20,14 +20,14 @@ fetch('/static/species2024.csv')
 function populateSpeciesList(speciesList) {
   const speciesInput = document.getElementById('speciesInput');
   const dataList = document.getElementById('speciesList');
-  
+
   speciesList.forEach(species => {
     const option = document.createElement('option');
     option.value = species;
     dataList.appendChild(option);
   });
-  
-  speciesInput.addEventListener('input', function() {
+
+  speciesInput.addEventListener('input', function () {
     const inputValue = this.value;
     const fuzzyResults = fuzzysort.go(inputValue, speciesList);
     const filteredOptions = fuzzyResults.map(result => result.target);
@@ -45,23 +45,23 @@ let selectedSpecies = [];
 
 // Function to add a species to the selectedSpecies array and display it
 function addSpecies(species) {
-    selectedSpecies.push(species);
-    const selectedSpeciesDiv = document.getElementById('selectedSpecies');
-    const speciesItem = document.createElement('div');
-    speciesItem.textContent = species;
-    selectedSpeciesDiv.appendChild(speciesItem);
-    // Update the hidden input with the array as a comma-separated string
-    document.getElementById('selectedSpeciesInput').value = selectedSpecies.join(',');
+  selectedSpecies.push(species);
+  const selectedSpeciesDiv = document.getElementById('selectedSpecies');
+  const speciesItem = document.createElement('div');
+  speciesItem.textContent = species;
+  selectedSpeciesDiv.appendChild(speciesItem);
+  // Update the hidden input with the array as a comma-separated string
+  document.getElementById('selectedSpeciesInput').value = selectedSpecies.join(',');
 }
 
 // Function to remove a species from the selectedSpecies array and update the display
 function removeSpecies(species) {
-    const index = selectedSpecies.indexOf(species);
-    if (index !== -1) {
-        selectedSpecies.splice(index, 1);
-        const selectedSpeciesDiv = document.getElementById('selectedSpecies');
-        selectedSpeciesDiv.removeChild(selectedSpeciesDiv.childNodes[index]);
-    }
+  const index = selectedSpecies.indexOf(species);
+  if (index !== -1) {
+    selectedSpecies.splice(index, 1);
+    const selectedSpeciesDiv = document.getElementById('selectedSpecies');
+    selectedSpeciesDiv.removeChild(selectedSpeciesDiv.childNodes[index]);
+  }
 }
 
 // // Add event listener to the form submission
@@ -76,7 +76,7 @@ function removeSpecies(species) {
 
 // Event listener for species addition
 const addSpeciesButton = document.getElementById('addSpeciesButton');
-addSpeciesButton.addEventListener('click', function() {
+addSpeciesButton.addEventListener('click', function () {
   const inputSpecies = speciesInput.value.trim();
   if (inputSpecies !== '' && Array.from(speciesList.options).map(option => option.value).includes(inputSpecies) && !selectedSpecies.includes(inputSpecies)) {
     addSpecies(inputSpecies);
@@ -88,11 +88,11 @@ addSpeciesButton.addEventListener('click', function() {
 
 // Event listener for species removal
 const selectedSpeciesDiv = document.getElementById('selectedSpecies');
-selectedSpeciesDiv.addEventListener('click', function(event) {
-    const speciesItem = event.target;
-    if (speciesItem.tagName === 'DIV') {
-        const species = speciesItem.textContent;
-        removeSpecies(species);
-    }
+selectedSpeciesDiv.addEventListener('click', function (event) {
+  const speciesItem = event.target;
+  if (speciesItem.tagName === 'DIV') {
+    const species = speciesItem.textContent;
+    removeSpecies(species);
+  }
 });
 
