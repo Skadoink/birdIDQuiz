@@ -21,12 +21,6 @@ def home():
         # Process the user input and start the quiz
         quiz = QuizBuilder(species_list, num_questions)
         return redirect(url_for("question"))
-    addspecbutton = request.form.get("addSpeciesButton")
-    print(addspecbutton)
-    if (
-        request.method == "POST" and request.form.get("addSpeciesButton") != None
-    ):  # needed?
-        return redirect(request.referrer)
     return render_template("index.html")
 
 
