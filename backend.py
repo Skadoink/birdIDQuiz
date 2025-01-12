@@ -136,6 +136,7 @@ class QuizBuilder:
         for _ in range(self.num_questions):
             num_options = min(len(self.species), 4)
             species_options = random.sample(self.species, num_options)
+            species_options = sorted(species_options, key=lambda x: x["species_name"])
             speccode = random.choice(species_options)["species_code"]
             specImageURL = self.getRandomimageURL(speccode)
             question = Question(speccode, specImageURL, species_options)

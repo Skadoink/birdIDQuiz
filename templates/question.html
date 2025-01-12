@@ -25,11 +25,11 @@
             <form method="POST" action="{{ url_for('question') }}">
                 <ul class="options">
                     {% for option in options %}
-                    <li><!-- radio button - option is the species code and name as a dict -->
+                    <ol><!-- radio button - option is the species code and name as a dict -->
 
                         <input type="radio" name="option" value="{{ option.species_code }}" required> {{
                         option.species_name }}
-                    </li>
+                    </ol>
                     {% endfor %}
                 </ul>
                 <button type="submit">Submit Answer</button>
