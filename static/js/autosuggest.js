@@ -17,6 +17,16 @@ fetch('/static/species2024.csv')
     console.error('Error loading CSV file:', error);
   });
 
+// Define an array to store the selected species
+let selectedSpecies = [];
+hiddenSpeciesInpute = document.getElementById('selectedSpeciesInput');
+if (hiddenSpeciesInpute.value) { // If there are already selected species
+  selectedSpecies = hiddenSpeciesInpute.value.split(","); 
+}
+for (let i = 0; i < selectedSpecies.length; i++) {
+  addSpecies(selectedSpecies[i]); // Add each hidden selected species to the display
+}
+
 function populateSpeciesList(speciesList) {
   const speciesInput = document.getElementById('speciesInput');
   const dataList = document.getElementById('speciesList');
@@ -39,9 +49,6 @@ function populateSpeciesList(speciesList) {
     });
   });
 }
-
-// Define an array to store the selected species
-let selectedSpecies = [];
 
 // Function to add a species to the selectedSpecies array and display it
 function addSpecies(species) {

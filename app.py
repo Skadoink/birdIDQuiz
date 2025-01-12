@@ -15,12 +15,16 @@ Session(app)
 @app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST" and request.form.get("submitButton"):
-        selected_species = request.form.get("selectedSpecies")
+        selected_species = request.form.get("selectedSpecies") #comma separated string
         num_questions = int(request.form.get("num_questions"))
-        # Convert the string to a list
-        selected_species = selected_species.split(",")
         # Process the user input and start the quiz
-        quiz = QuizBuilder(selected_species, num_questions)
+        quiz = QuizBuilder(selected_species.split(","), num_questions)
+        if quiz.no_image_species:
+            return render_template(
+                "index.html",
+                no_image_species=quiz.no_image_species,
+                selected_species=selected_species,
+            )
         # store the quiz in the session
         session["quiz"] = quiz
         return redirect(url_for("question"))
