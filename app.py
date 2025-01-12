@@ -69,11 +69,11 @@ def answer():
     )
 
 
-@app.route("/quiz_end")
+@app.route("/quiz_end", methods=["GET", "POST"])
 def quiz_end():
-    if request.method == "GET":
+    if request.method == "GET" and request.form.get("endButton") != None:
         return redirect(url_for("home"))
-    return render_template("quiz_end.html")
+    return render_template("quiz_end.html", correct_answers=session["quiz"].correct_answers, num_questions=session["quiz"].num_questions)
 
 
 if __name__ == "__main__":
