@@ -10,6 +10,8 @@ app.config["STATIC_FOLDER"] = "static"
 
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
+@app.route("/index", methods=["GET", "POST"])
 def home():
     global quiz
 
@@ -63,7 +65,7 @@ def answer():
             correct_answers=quiz.correct_answers,
             num_questions=quiz.num_questions,
         )
-    return redirect(url_for("quiz_end"))
+    return redirect(url_for("home"))
 
 
 @app.route("/quiz_end")
