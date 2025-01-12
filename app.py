@@ -9,15 +9,11 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# session["quiz"] = QuizBuilder(["Snow Petrel"], 1) #outside request context
-
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
 @app.route("/index", methods=["GET", "POST"])
-def home():
-    # global quiz # disabled as now quiz is stored in session
-    
+def home():    
     if request.method == "POST" and request.form.get("submitButton"):
         selected_species = request.form.get("selectedSpecies")
         num_questions = int(request.form.get("num_questions"))
