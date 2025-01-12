@@ -9,11 +9,11 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
-@app.route("/index", methods=["GET", "POST"])
-def home():    
+def home():
     if request.method == "POST" and request.form.get("submitButton"):
         selected_species = request.form.get("selectedSpecies")
         num_questions = int(request.form.get("num_questions"))
@@ -24,34 +24,24 @@ def home():
         # store the quiz in the session
         session["quiz"] = quiz
         return redirect(url_for("question"))
-    
+
     return render_template("index.html")
 
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
+    current_question = session["quiz"].get_current_question()
+
     if request.method == "POST":
         selected_option = request.form["option"]
-        current_question = session["quiz"].get_current_question()
 
         is_correct = selected_option == current_question.speccode
+        session["is_correct"] = is_correct
         if is_correct:
-            session["quiz"].correct_answers += 1
-            session.modified = True
+            session["quiz"].correct_answers += 1  # don't need session.modified = True
 
-        session["quiz"].next_question()
-        session.modified = True
+        return redirect(url_for("answer"))
 
-        return render_template(
-            "answer.html",
-            current_question_index=session["quiz"].current_question_index,
-            num_questions=session["quiz"].num_questions,
-            is_correct=is_correct,
-            correct_answer=current_question.spec_name,
-            embed_url=current_question.embed_URL,
-        )
-
-    current_question = session["quiz"].get_current_question()
     return render_template(
         "question.html",
         current_question_index=session["quiz"].current_question_index + 1,
@@ -64,16 +54,25 @@ def question():
 @app.route("/answer", methods=["GET", "POST"])
 def answer():
     if request.method == "POST" and request.form.get("endButton") != None:
-        return render_template(
-            "quiz_end.html",
-            correct_answers=session["quiz"].correct_answers,
-            num_questions=session["quiz"].num_questions,
-        )
-    return redirect(url_for("home"))
+        return redirect(url_for("quiz_end"))
+    elif request.method == "POST" and request.form.get("nextButton") != None:
+        session["quiz"].next_question()
+        session.modified = True
+        return redirect(url_for("question"))
+    return render_template(
+        "answer.html",
+        current_question_index=session["quiz"].current_question_index + 1,
+        num_questions=session["quiz"].num_questions,
+        is_correct=session["is_correct"],
+        correct_answer=session["quiz"].get_current_question().spec_name,
+        embed_url=session["quiz"].get_current_question().embed_URL,
+    )
 
 
 @app.route("/quiz_end")
 def quiz_end():
+    if request.method == "GET":
+        return redirect(url_for("home"))
     return render_template("quiz_end.html")
 
 
