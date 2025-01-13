@@ -65,6 +65,8 @@ function removeSpecies(species) {
     selectedSpecies.splice(index, 1);
     const selectedSpeciesDiv = document.getElementById('selectedSpecies');
     selectedSpeciesDiv.removeChild(selectedSpeciesDiv.childNodes[index]);
+    // Update the hidden input with the array as a comma-separated string
+    document.getElementById('selectedSpeciesInput').value = selectedSpecies.join(',');
   }
 }
 
