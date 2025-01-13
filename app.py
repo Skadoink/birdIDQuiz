@@ -19,6 +19,9 @@ def home():
         # Process the user input and start the quiz
         quiz = QuizBuilder(session["selected_species"].split(","), num_questions)
         if quiz.no_image_species:
+            for species in quiz.no_image_species:
+                session["selected_species"] = session["selected_species"].replace(species + ",", "")
+                session["selected_species"] = session["selected_species"].replace("," + species, "") # in case it's the last species
             return render_template(
                 "index.html",
                 no_image_species=quiz.no_image_species,

@@ -18,7 +18,7 @@ class Question:
         self.speccode = speccode
         self.image_URL = image_URL
         self.species_options = species_options
-        self.spec_name = self.get_spec_name(speccode, species_options)  # get the common name of the species
+        self.spec_name = Question.get_spec_name(speccode, species_options)  # get the common name of the species
         self.embed_URL = self.get_embed_URL(image_URL)
 
     def get_embed_URL(self, image_URL):
@@ -31,7 +31,7 @@ class Question:
         # embed_URL = '<iframe src="https://macaulaylibrary.org/asset/'+image_ID+'/embed" height="507" width="640" frameborder="0" allowfullscreen></iframe>'
         return embed_URL
 
-    def get_spec_name(self, speccode, species_options):
+    def get_spec_name(speccode, species_options):
         return [
             d["species_name"] for d in species_options if d["species_code"] == speccode
         ][
@@ -52,10 +52,12 @@ class QuizBuilder:
         self.given_answers = []
         self.correct_answers = 0
         self.species, self.species_codes = self.find_spec_codes()
-        self.check_CSVs()
-        self.create_questions()
-        self.current_question_index = 0
         self.no_image_species = []
+        self.current_question_index = 0
+        self.check_CSVs()
+        if self.no_image_species:
+            return
+        self.create_questions()
 
     def find_spec_codes(self):
         """
@@ -121,6 +123,9 @@ class QuizBuilder:
                 "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/"
             ):
                 images.append(src)
+        if len(images) == 0:
+            self.no_image_species.append(Question.get_spec_name(spec, self.species))
+            return
         with open(
             join(
                 "species_CSVs",
@@ -143,8 +148,6 @@ class QuizBuilder:
             species_options = sorted(species_options, key=lambda x: x["species_name"])
             speccode = random.choice(species_options)["species_code"]
             specImageURL = self.getRandomimageURL(speccode)
-            if specImageURL is None:
-                self.no_image_species.append(speccode)
             question = Question(speccode, specImageURL, species_options)
             self.questions.append(question)
 
