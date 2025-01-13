@@ -10,14 +10,22 @@
 
 <body>
     <h1>Bird Quiz</h1>
-    <form method="POST" action="/" onkeydown="return event.key != 'Enter';"> <!-- find a more accessibility friendly solution -->
+    <form method="POST" action="/" onkeydown="return event.key != 'Enter';">
+        <!-- find a more accessibility friendly solution than blocking enter completely -->
+        {% if no_image_species %}
+        <p style="color: red;">No images found for the following species. Are they extinct/cryptic? <br>
+            {% for species in no_image_species %}
+            {{ species }}<br>
+            {% endfor %}
+        </p>
+        {% endif %}
         <label for="species">Bird Species:</label>
         <input type="text" id="speciesInput" list="speciesList" placeholder="Enter species name">
         <datalist type="list" id="speciesList"></datalist>
         <button id="addSpeciesButton" type="button" name="addSpeciesButton">Add</button>
         <div id="selectedSpecies" style="margin-top: 10px; margin-bottom: 10px;"></div>
         <!-- Hidden input to store the JavaScript list as a string -->
-        <input type="hidden" id="selectedSpeciesInput" name="selectedSpeciesInput" value="{{ selected_species }}"/>
+        <input type="hidden" id="selectedSpeciesInput" name="selectedSpeciesInput" value="{{ selected_species }}" />
         <label for="num_questions">Number of Questions:</label>
         <input type="number" id="num_questions" name="num_questions" max="50" min="1" value="20"><br><br>
         <input type="submit" name="submitButton" value="Start Quiz">
