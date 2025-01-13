@@ -9,27 +9,28 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST" and request.form.get("submitButton"):
-        selected_species = request.form.get("selectedSpecies") #comma separated string
+        session["selected_species"] = request.form.get("selectedSpeciesInput") #comma separated string
         num_questions = int(request.form.get("num_questions"))
         # Process the user input and start the quiz
-        quiz = QuizBuilder(selected_species.split(","), num_questions)
+        quiz = QuizBuilder(session["selected_species"].split(","), num_questions)
         if quiz.no_image_species:
             return render_template(
                 "index.html",
                 no_image_species=quiz.no_image_species,
-                selected_species=selected_species,
+                selected_species=session.get("selected_species", ""),
             )
         # store the quiz in the session
         session["quiz"] = quiz
         return redirect(url_for("question"))
 
-    return render_template("index.html")
+    return render_template("index.html",
+                no_image_species=[],
+                selected_species=session.get("selected_species", ""))
 
 
 @app.route("/question", methods=["GET", "POST"])
