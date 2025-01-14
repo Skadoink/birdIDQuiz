@@ -12,7 +12,44 @@
     <div class="quiz-container">
         <h1>Quiz Completed!</h1>
         <p>Thank you for participating in the bird identification quiz.</p>
-        <p>Your score: {{ correct_answers }}/{{ num_questions }}</p>
+        <p>Your score: {{ num_correct_answers }}/{{ num_questions }}</p>
+
+        <form action="/" method="GET">
+            <button type="submit">Home</button>
+        </form>
+
+        <!-- Incorrectly Answered Section -->
+        <section>
+            <h3 style="color: red;">Incorrectly Answered</h3>
+            {% if incorrect_questions %}
+                <div class="images-container">
+                    {% for question in incorrect_questions %}
+                        <div class="image-card">
+                            <iframe src="{{ question.embed_URL }}" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No questions were answered incorrectly.</p>
+            {% endif %}
+        </section>
+
+         <!-- Correctly Answered Section -->
+         <section>
+            <h3 style="color: green;">Correctly Answered</h3>
+            {% if correct_questions %}
+                <div class="images-container">
+                    {% for question in correct_questions %}
+                        <div class="image-card">
+                            <iframe src="{{ question.embed_URL }}" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No questions were answered correctly.</p>
+            {% endif %}
+        </section>
+
         <form action="/" method="GET">
             <button type="submit">Home</button>
         </form>

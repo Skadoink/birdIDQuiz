@@ -9,19 +9,26 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST" and request.form.get("submitButton"):
-        session["selected_species"] = request.form.get("selectedSpeciesInput") #comma separated string
+        session["selected_species"] = request.form.get(
+            "selectedSpeciesInput"
+        )  # comma separated string
         num_questions = int(request.form.get("num_questions"))
         # Process the user input and start the quiz
         quiz = QuizBuilder(session["selected_species"].split(","), num_questions)
         if quiz.no_image_species:
             for species in quiz.no_image_species:
-                session["selected_species"] = session["selected_species"].replace(species + ",", "")
-                session["selected_species"] = session["selected_species"].replace("," + species, "") # in case it's the last species
+                session["selected_species"] = session["selected_species"].replace(
+                    species + ",", ""
+                )
+                session["selected_species"] = session["selected_species"].replace(
+                    "," + species, ""
+                )  # in case it's the last species
             return render_template(
                 "index.html",
                 no_image_species=quiz.no_image_species,
@@ -31,9 +38,11 @@ def home():
         session["quiz"] = quiz
         return redirect(url_for("question"))
 
-    return render_template("index.html",
-                no_image_species=[],
-                selected_species=session.get("selected_species", ""))
+    return render_template(
+        "index.html",
+        no_image_species=[],
+        selected_species=session.get("selected_species", ""),
+    )
 
 
 @app.route("/question", methods=["GET", "POST"])
@@ -46,7 +55,10 @@ def question():
         is_correct = selected_option == current_question.speccode
         session["is_correct"] = is_correct
         if is_correct:
-            session["quiz"].correct_answers += 1  # don't need session.modified = True
+            session["quiz"].num_correct_answers += 1
+            session["quiz"].correct_questions.append(current_question)
+        else:
+            session["quiz"].incorrect_questions.append(current_question)
 
         return redirect(url_for("answer"))
 
@@ -81,7 +93,13 @@ def answer():
 def quiz_end():
     if request.method == "GET" and request.form.get("endButton") != None:
         return redirect(url_for("home"))
-    return render_template("quiz_end.html", correct_answers=session["quiz"].correct_answers, num_questions=session["quiz"].num_questions)
+    return render_template(
+        "quiz_end.html",
+        num_correct_answers=session["quiz"].num_correct_answers,
+        num_questions=session["quiz"].num_questions,
+        incorrect_questions=session["quiz"].incorrect_questions,
+        correct_questions=session["quiz"].correct_questions,
+    )
 
 
 if __name__ == "__main__":

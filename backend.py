@@ -49,8 +49,9 @@ class QuizBuilder:
         self.species_names = species_names
         self.num_questions = num_questions
         self.questions = []
-        self.given_answers = []
-        self.correct_answers = 0
+        self.correct_questions = []
+        self.incorrect_questions = []
+        self.num_correct_answers = 0
         self.species, self.species_codes = self.find_spec_codes()
         self.no_image_species = []
         self.current_question_index = 0
