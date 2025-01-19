@@ -8,11 +8,16 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config.from_pyfile("config.py")
 
+
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST" and request.form.get("submitButton"):
+        if request.form.get("selectedSpeciesInput") == "":
+            return render_template(
+                "index.html", no_image_species=[], selected_species=""
+            )
         session["selected_species"] = request.form.get(
             "selectedSpeciesInput"
         )  # comma separated string
