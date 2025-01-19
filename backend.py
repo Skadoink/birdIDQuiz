@@ -38,6 +38,17 @@ class Question:
             0
         ]  # get the name of the species with the correct code
 
+    def to_dict(self):
+        return {
+            "speccode": self.speccode,
+            "image_URL": self.image_URL,
+            "species_options": self.species_options,
+            "spec_name": self.spec_name,
+            "embed_URL": self.embed_URL,
+        }
+        
+    def from_dict(d):
+        return Question(d["speccode"], d["image_URL"], d["species_options"])
 
 class QuizBuilder:
     def __init__(self, species_names, num_questions):
@@ -174,3 +185,23 @@ class QuizBuilder:
     def next_question(self):
         self.current_question_index += 1
         return self.current_question_index < len(self.questions)
+
+    def to_dict(self):
+        return {
+            "species_names": self.species_names,
+            "num_questions": self.num_questions,
+            "questions": [q.to_dict() for q in self.questions],
+            "correct_questions": [q.to_dict() for q in self.correct_questions],
+            "incorrect_questions": [q.to_dict() for q in self.incorrect_questions],
+            "num_correct_answers": self.num_correct_answers,
+            "current_question_index": self.current_question_index,
+        }
+        
+    def from_dict(d):
+        quiz = QuizBuilder(d["species_names"], d["num_questions"])
+        quiz.questions = [Question.from_dict(q) for q in d["questions"]]
+        quiz.correct_questions = [Question.from_dict(q) for q in d["correct_questions"]]
+        quiz.incorrect_questions = [Question.from_dict(q) for q in d["incorrect_questions"]]
+        quiz.num_correct_answers = d["num_correct_answers"]
+        quiz.current_question_index = d["current_question_index"]
+        return quiz

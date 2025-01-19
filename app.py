@@ -6,9 +6,9 @@ app = Flask(__name__, static_folder="static")
 app.config["STATIC_FOLDER"] = "static"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-# app.config.from_object("app.default_settings") 
+# app.config.from_object("app.default_settings")
 # app.config.from_envvar("APP_SETTINGS")
-app.secret_key = 'BAD_SECRET_KEY'
+app.secret_key = "BAD_SECRET_KEY"
 
 
 # Define your routes and views here
@@ -36,7 +36,7 @@ def home():
                 selected_species=session.get("selected_species", ""),
             )
         # store the quiz in the session
-        session["quiz"] = quiz
+        session["quiz"] = quiz.to_dict()
         return redirect(url_for("question"))
 
     return render_template(
@@ -48,7 +48,7 @@ def home():
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
-    current_question = session["quiz"].get_current_question()
+    current_question = QuizBuilder.from_dict(session["quiz"]).get_current_question()
 
     if request.method == "POST":
         selected_option = request.form["option"]
@@ -56,17 +56,17 @@ def question():
         is_correct = selected_option == current_question.speccode
         session["is_correct"] = is_correct
         if is_correct:
-            session["quiz"].num_correct_answers += 1
-            session["quiz"].correct_questions.append(current_question)
+            session["quiz"]["num_correct_answers"] += 1
+            session["quiz"]["correct_questions"].append(current_question.to_dict())
         else:
-            session["quiz"].incorrect_questions.append(current_question)
+            session["quiz"]["incorrect_questions"].append(current_question.to_dict())
 
         return redirect(url_for("answer"))
 
     return render_template(
         "question.html",
-        current_question_index=session["quiz"].current_question_index + 1,
-        num_questions=session["quiz"].num_questions,
+        current_question_index=session["quiz"]["current_question_index"] + 1,
+        num_questions=session["quiz"]["num_questions"],
         image_url=current_question.image_URL,
         options=current_question.species_options,
     )
@@ -74,19 +74,21 @@ def question():
 
 @app.route("/answer", methods=["GET", "POST"])
 def answer():
+    quiz = QuizBuilder.from_dict(session["quiz"])
     if request.method == "POST" and request.form.get("endButton") != None:
         return redirect(url_for("quiz_end"))
     elif request.method == "POST" and request.form.get("nextButton") != None:
-        session["quiz"].next_question()
+        quiz.next_question()
+        session["quiz"] = quiz.to_dict()
         session.modified = True
         return redirect(url_for("question"))
     return render_template(
         "answer.html",
-        current_question_index=session["quiz"].current_question_index + 1,
-        num_questions=session["quiz"].num_questions,
+        current_question_index=quiz.current_question_index + 1,
+        num_questions=quiz.num_questions,
         is_correct=session["is_correct"],
-        correct_answer=session["quiz"].get_current_question().spec_name,
-        embed_url=session["quiz"].get_current_question().embed_URL,
+        correct_answer=quiz.get_current_question().spec_name,
+        embed_url=quiz.get_current_question().embed_URL,
     )
 
 
@@ -94,12 +96,13 @@ def answer():
 def quiz_end():
     if request.method == "GET" and request.form.get("endButton") != None:
         return redirect(url_for("home"))
+    quiz = QuizBuilder.from_dict(session["quiz"])
     return render_template(
         "quiz_end.html",
-        num_correct_answers=session["quiz"].num_correct_answers,
-        num_questions=session["quiz"].num_questions,
-        incorrect_questions=session["quiz"].incorrect_questions,
-        correct_questions=session["quiz"].correct_questions,
+        num_correct_answers=quiz.num_correct_answers,
+        num_questions=quiz.num_questions,
+        incorrect_questions=quiz.incorrect_questions,
+        correct_questions=quiz.correct_questions,
     )
 
 
