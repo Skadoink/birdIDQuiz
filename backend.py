@@ -5,6 +5,7 @@ from os.path import isfile, join
 import random
 import urllib.request
 from bs4 import BeautifulSoup
+from pathlib import Path
 
 
 class Question:
@@ -75,7 +76,9 @@ class QuizBuilder:
         """
         Makes a dictionary of species codes and names.
         """
-        species_csv = csv.reader(open(os.path.join("static", "species2024.csv"), "r"))
+        THIS_FOLDER = Path(__file__).parent.resolve()
+        species_csv_path = (THIS_FOLDER / "species2024.csv").resolve()
+        species_csv = csv.reader(open(species_csv_path, "r"))
         species_codes = []  # list of species codes
         species = []  # list of dictionaries with species code and common name
         for row in species_csv:
