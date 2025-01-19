@@ -2,14 +2,11 @@ from flask import Flask, redirect, render_template, request, url_for, session
 from waitress import serve
 from backend import Question, QuizBuilder
 
-app = Flask(__name__, static_folder="static")
+app = Flask(__name__, static_folder="static", instance_relative_config=True)
 app.config["STATIC_FOLDER"] = "static"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-# app.config.from_object("app.default_settings")
-# app.config.from_envvar("APP_SETTINGS")
-app.secret_key = "BAD_SECRET_KEY"
-
+app.config.from_pyfile("config.py")
 
 # Define your routes and views here
 @app.route("/", methods=["GET", "POST"])
