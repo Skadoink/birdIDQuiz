@@ -11,7 +11,7 @@ def images_exist(spec):
     spec_csv = "species_CSVs/" + spec + ".csv"
     if os.path.exists(spec_csv):
         with open(spec_csv, "r", encoding="utf8") as f:
-            if sum(1 for line in f) > 1:
+            if sum(1 for line in f) > 2:
                 return True
     return False
 
