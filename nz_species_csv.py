@@ -8,7 +8,7 @@ import time
 
 def images_exist(spec):
     """Checks if the CSV for the species exists and has at least 1 image."""
-    spec_csv = "species_CSVs/" + spec + ".csv"
+    spec_csv = "nz_species_CSVs/" + spec + ".csv"
     if os.path.exists(spec_csv):
         with open(spec_csv, "r", encoding="utf8") as f:
             if sum(1 for line in f) > 2:
