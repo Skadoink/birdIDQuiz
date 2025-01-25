@@ -7,7 +7,6 @@ import urllib.request
 from bs4 import BeautifulSoup
 from pathlib import Path
 
-
 class Question:
     def __init__(self, speccode, image_URL, species_options):
         """
@@ -29,7 +28,6 @@ class Question:
         """
         image_ID = image_URL.split("/")[-2]
         embed_URL = "https://macaulaylibrary.org/asset/" + image_ID + "/embed"
-        # embed_URL = '<iframe src="https://macaulaylibrary.org/asset/'+image_ID+'/embed" height="507" width="640" frameborder="0" allowfullscreen></iframe>'
         return embed_URL
 
     def get_spec_name(speccode, species_options):
@@ -64,94 +62,34 @@ class QuizBuilder:
         self.correct_questions = []
         self.incorrect_questions = []
         self.num_correct_answers = 0
-        self.species, self.species_codes = self.find_spec_codes()
-        self.no_image_species = []
         self.current_question_index = 0
-        self.check_CSVs()
-        if self.no_image_species:
-            return
+        self.species, self.species_codes = self.find_spec_codes()
         self.create_questions()
+
+    def build_species_dicts():
+        """
+        Makes a dictionary of species codes and names.
+        Skips column labels (first row). 
+        Species code is the 20th column, species name is the 3rd column.
+        """
+        species_codes_to_names = {}
+        species_names_to_codes = {}
+        CSV_FOLDER = "nz_species_CSVs_202501"
+        for file in os.listdir(CSV_FOLDER):
+            with open(join(CSV_FOLDER, file), "r") as f:
+                reader = csv.reader(f)
+                next(reader)  # skip the first row
+                species_codes_to_names[reader[0][19]] = reader[0][2] 
+                species_names_to_codes[reader[0][2]] = reader[0][19]
+        return species_codes_to_names, species_names_to_codes
 
     def find_spec_codes(self):
         """
         Makes a dictionary of species codes and names.
         """
-        THIS_FOLDER = Path(__file__).parent.resolve()
-        species_csv_path = (THIS_FOLDER / "species2024.csv").resolve()
-        species_csv = csv.reader(open(species_csv_path, "r"))
-        species_codes = []  # list of species codes
-        species = []  # list of dictionaries with species code and common name
-        for row in species_csv:
-            if row[1] in self.species_names:
-                species_codes.append(row[0])
-                species.append({"species_code": row[0], "species_name": row[1]})
-            if len(self.species_names) == len(species):
-                break
-        return species, species_codes
-
-    def check_CSVs(self):
-        """
-        Checks if the CSV files for the species are up to date. If not, updates them.
-        """
-        currentYearMonth = datetime.datetime.now().strftime("%Y-%m")
-        species_path = "species_CSVs"
-        if not os.path.exists(species_path):
-            os.makedirs(species_path)
-        onlyfiles = [
-            f
-            for f in os.listdir(species_path)
-            if isfile(join(species_path, f)) and f.endswith(".csv")
-        ]
-        for spec in self.species_codes:
-            if len(onlyfiles) == 0:
-                self.updateCSV(spec)
-            for i, file in enumerate(onlyfiles):
-                # correct species and up to date
-                if spec in file and str(currentYearMonth) in file:
-                    break
-                # correct species but not up to date
-                elif spec in file and str(currentYearMonth) not in file:
-                    self.updateCSV(spec)
-                    os.remove(
-                        join(species_path, file)
-                    )  # TODO should only do this if the update is successful
-                # if we've reached the end of the list and haven't found a match
-                elif i == len(onlyfiles) - 1:
-                    self.updateCSV(spec)
-
-    def updateCSV(self, spec):
-        """
-        Gets the latest image URLs from the species' media page on eBird and saves it to a CSV file.
-        @param spec: species code
-        """
-        url = (
-            "https://media.ebird.org/catalog?taxonCode="
-            + spec
-            + "&sort=rating_rank_desc&mediaType=photo&view=list"
-        )
-        html_page = urllib.request.urlopen(url)
-        soup = BeautifulSoup(html_page, "html.parser")
-        images = []
-        for img in soup.findAll("img"):
-            src = img.get("src")
-            if src.startswith(
-                "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/"
-            ):
-                images.append(src)
-        if len(images) == 0:
-            self.no_image_species.append(Question.get_spec_name(spec, self.species))
-            return
-        with open(
-            join(
-                "species_CSVs",
-                spec + "_" + datetime.datetime.now().strftime("%Y-%m") + ".csv",
-            ),
-            "w",
-            newline="",
-        ) as f:
-            writer = csv.writer(f)
-            for image in images:
-                writer.writerow([image])
+        quiz_species_codes = [species_names_to_codes[species] for species in self.species_names]
+        quiz_species_codes_to_names = {code: species for species, code in species_names_to_codes.items()}
+        return quiz_species_codes, quiz_species_codes_to_names
 
     def create_questions(self):
         """
@@ -208,3 +146,7 @@ class QuizBuilder:
         quiz.num_correct_answers = d["num_correct_answers"]
         quiz.current_question_index = d["current_question_index"]
         return quiz
+    
+    
+#dictionary of species codes and names
+species_codes_to_names, species_names_to_codes = QuizBuilder.build_species_dict()
