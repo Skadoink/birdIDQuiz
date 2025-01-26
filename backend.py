@@ -80,8 +80,11 @@ class QuizBuilder:
             with open(join(CSV_FOLDER, file), "r") as f:
                 reader = csv.reader(f)
                 next(reader)  # skip the first row
-                species_codes_to_names[reader[0][19]] = reader[0][2] 
-                species_names_to_codes[reader[0][2]] = reader[0][19]
+                for row in reader:
+                    species_code = row[19]
+                    species_name = row[2]
+                    species_codes_to_names[species_code] = species_name
+                    species_names_to_codes[species_name] = species_code
         return species_codes_to_names, species_names_to_codes
 
     def find_spec_codes(self):
