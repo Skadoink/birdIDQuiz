@@ -44,7 +44,7 @@ def home():
 
     return render_template(
         "index.html",
-        all_species = backend.species_names_to_codes.keys(),
+        all_species = ",".join(backend.species_names_to_codes.keys()),
         no_image_species=[],
         selected_species=session.get("selected_species", ""),
     )
