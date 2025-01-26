@@ -61,9 +61,10 @@ class QuizBuilder:
         self.questions = []
         self.correct_questions = []
         self.incorrect_questions = []
+        self.no_image_species = [] # redundant when we know all our CSVs have images, but might be useful again in the future
         self.num_correct_answers = 0
         self.current_question_index = 0
-        self.species, self.species_codes = self.find_spec_codes()
+        self.quiz_species_codes_to_names = self.find_spec_codes()
         self.create_questions()
 
     def build_species_dicts():
@@ -85,20 +86,21 @@ class QuizBuilder:
 
     def find_spec_codes(self):
         """
-        Makes a dictionary of species codes and names.
+        Makes a dictionary of quiz's species codes to species names.
         """
-        quiz_species_codes = [species_names_to_codes[species] for species in self.species_names]
-        quiz_species_codes_to_names = {code: species for species, code in species_names_to_codes.items()}
-        return quiz_species_codes, quiz_species_codes_to_names
+        quiz_species_codes_to_names = {}
+        for species_name in self.species_names:
+            quiz_species_codes_to_names[species_names_to_codes[species_name]] = species_name
+        return quiz_species_codes_to_names
 
     def create_questions(self):
         """
         Creates the questions for the quiz.
         """
         for _ in range(self.num_questions):
-            num_options = min(len(self.species), 4)
-            species_options = random.sample(self.species, num_options)
-            species_options = sorted(species_options, key=lambda x: x["species_name"])
+            num_options = min(len(self.quiz_species_codes_to_names), 4)
+            species_options = random.sample(self.quiz_species_codes_to_names, num_options)
+            species_options = sorted(species_options, key=lambda x: x["species_name"]) # sort by species name
             speccode = random.choice(species_options)["species_code"]
             specImageURL = self.getRandomimageURL(speccode)
             question = Question(speccode, specImageURL, species_options)
@@ -149,4 +151,4 @@ class QuizBuilder:
     
     
 #dictionary of species codes and names
-species_codes_to_names, species_names_to_codes = QuizBuilder.build_species_dict()
+species_codes_to_names, species_names_to_codes = QuizBuilder.build_species_dicts()

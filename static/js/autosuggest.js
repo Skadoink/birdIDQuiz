@@ -1,21 +1,26 @@
-fetch('/static/species2024.csv')
-  .then(response => response.text())
-  .then(csvData => {
-    const rows = csvData.split('\n');
-    const speciesList = [];
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i].trim(); // Trim leading/trailing whitespaces
-      if (row) {
-        const columns = row.split(',');
-        const speciesName = columns[1];
-        speciesList.push(speciesName);
-      }
-    }
-    populateSpeciesList(speciesList);
-  })
-  .catch(error => {
-    console.error('Error loading CSV file:', error);
-  });
+// Load the species list from hidden input
+let allSpecies = document.getElementById('allSpeciesInput').value;
+populateSpeciesList(allSpecies.split(','));
+
+// Old code to load species list from CSV file
+// fetch('/static/species2024.csv')
+//   .then(response => response.text())
+//   .then(csvData => {
+//     const rows = csvData.split('\n');
+//     const speciesList = [];
+//     for (let i = 0; i < rows.length; i++) {
+//       const row = rows[i].trim(); // Trim leading/trailing whitespaces
+//       if (row) {
+//         const columns = row.split(',');
+//         const speciesName = columns[1];
+//         speciesList.push(speciesName);
+//       }
+//     }
+//     populateSpeciesList(speciesList);
+//   })
+//   .catch(error => {
+//     console.error('Error loading CSV file:', error);
+//   });
 
 let selectedSpecies = []; // Array to store the selected species
 hiddenSpeciesInput = document.getElementById('selectedSpeciesInput');

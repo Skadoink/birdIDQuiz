@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, request, url_for, session
 from waitress import serve
 from backend import Question, QuizBuilder
+import backend
 
 app = Flask(__name__, static_folder="static", instance_relative_config=True)
 app.config["STATIC_FOLDER"] = "static"
@@ -24,7 +25,7 @@ def home():
         num_questions = int(request.form.get("num_questions"))
         # Process the user input and start the quiz
         quiz = QuizBuilder(session["selected_species"].split(","), num_questions)
-        if quiz.no_image_species:
+        if quiz.no_image_species: # redundant when we know all our CSVs have images, but might be useful again in the future
             for species in quiz.no_image_species:
                 session["selected_species"] = session["selected_species"].replace(
                     species + ",", ""
@@ -43,6 +44,7 @@ def home():
 
     return render_template(
         "index.html",
+        all_species = backend.species_names_to_codes.keys(),
         no_image_species=[],
         selected_species=session.get("selected_species", ""),
     )
