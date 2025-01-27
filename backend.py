@@ -71,7 +71,7 @@ class QuizBuilder:
         """
         Makes a dictionary of species codes and names.
         Skips column labels (first row). 
-        Species code is the 20th column, species name is the 3rd column.
+        Species name is the 3rd column.row[19]
         """
         species_codes_to_names = {}
         species_names_to_codes = {}
@@ -81,19 +81,25 @@ class QuizBuilder:
                 reader = csv.reader(f)
                 next(reader)  # skip the first row
                 for row in reader:
-                    species_code = row[19]
-                    species_name = row[2]
+                    species_code = file.split(".")[0]
+                    species_name = row[2].split(" (")[0] # remove the subspecies if present
                     species_codes_to_names[species_code] = species_name
                     species_names_to_codes[species_name] = species_code
+                    break
         return species_codes_to_names, species_names_to_codes
 
     def find_spec_codes(self):
         """
-        Makes a dictionary of quiz's species codes to species names.
+        Makes a list of dictionaries of quiz's species codes to species names.
         """
-        quiz_species_codes_to_names = {}
+        quiz_species_codes_to_names = []
         for species_name in self.species_names:
-            quiz_species_codes_to_names[species_names_to_codes[species_name]] = species_name
+            quiz_species_codes_to_names.append(
+                {
+                    "species_code": species_names_to_codes[species_name],
+                    "species_name": species_name,
+                }
+            )
         return quiz_species_codes_to_names
 
     def create_questions(self):
@@ -102,7 +108,7 @@ class QuizBuilder:
         """
         for _ in range(self.num_questions):
             num_options = min(len(self.quiz_species_codes_to_names), 4)
-            species_options = random.sample(self.quiz_species_codes_to_names, num_options)
+            species_options = random.sample(list(self.quiz_species_codes_to_names), num_options)
             species_options = sorted(species_options, key=lambda x: x["species_name"]) # sort by species name
             speccode = random.choice(species_options)["species_code"]
             specImageURL = self.getRandomimageURL(speccode)
@@ -114,15 +120,16 @@ class QuizBuilder:
         Gets a random image ID from the CSV file for the given species.
         @param speccode: species code
         """
-        for file in os.listdir("species_CSVs"):
+        for file in os.listdir("nz_species_CSVs_202501"):
             print(file, speccode)
             if speccode in file:
-                with open(join("species_CSVs", file), "r") as f:
+                with open(join("nz_species_CSVs_202501", file), "r") as f:
                     reader = csv.reader(f)
                     data = list(reader)
                     if len(data) == 0:
                         return None
-                    imageURL = random.choice(data)[0]
+                    imageID = random.choice(data)[0]
+                    imageURL = "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/" + imageID + "/1200"
                     return imageURL
 
     def get_current_question(self):
