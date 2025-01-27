@@ -75,9 +75,10 @@ class QuizBuilder:
         """
         species_codes_to_names = {}
         species_names_to_codes = {}
-        CSV_FOLDER = "nz_species_CSVs_202501"
+        THIS_FOLDER = Path(__file__).parent.resolve()
+        CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202501"
         for file in os.listdir(CSV_FOLDER):
-            with open(join(CSV_FOLDER, file), "r") as f:
+            with open(join(CSV_FOLDER, file), "r", encoding="utf8") as f:
                 reader = csv.reader(f)
                 next(reader)  # skip the first row
                 for row in reader:
@@ -120,10 +121,11 @@ class QuizBuilder:
         Gets a random image ID from the CSV file for the given species.
         @param speccode: species code
         """
-        for file in os.listdir("nz_species_CSVs_202501"):
-            print(file, speccode)
+        THIS_FOLDER = Path(__file__).parent.resolve()
+        CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202501"
+        for file in os.listdir(CSV_FOLDER):
             if speccode in file:
-                with open(join("nz_species_CSVs_202501", file), "r") as f:
+                with open(join("nz_species_CSVs_202501", file), "r", encoding="utf8") as f:
                     reader = csv.reader(f)
                     data = list(reader)
                     if len(data) == 0:
