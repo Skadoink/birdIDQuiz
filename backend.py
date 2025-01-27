@@ -125,7 +125,7 @@ class QuizBuilder:
         CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202501"
         for file in os.listdir(CSV_FOLDER):
             if speccode in file:
-                with open(join("nz_species_CSVs_202501", file), "r", encoding="utf8") as f:
+                with open(join("CSV_FOLDER", file), "r", encoding="utf8") as f:
                     reader = csv.reader(f)
                     data = list(reader)
                     if len(data) == 0:
