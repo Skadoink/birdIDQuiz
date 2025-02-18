@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Question</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>Bird Identification Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body>
-    <header>
-        <h1>Bird Quiz</h1>
+<body class="bg-gradient-to-r from-blue-100 to-blue-200 min-h-screen flex flex-col items-center">
+    <header class="w-full bg-white shadow-md p-4 text-center">
+        <h1 class="text-3xl font-bold text-gray-700">Bird Identification Quiz</h1>
     </header>
-    <main>
-        <div class="quiz-container">
-            <h2>Question {{ current_question_index }} of {{ num_questions }}</h2>
-
-            <div class="question">
-                <img src="{{ image_url }}" alt="Bird Image" class="question-image"
-                    style="max-width: 100%; height: auto;">
-                <p>What is the name of this bird?</p>
+    <main class="flex-grow w-full max-w-2xl p-4">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-600">Question {{ current_question_index }} of {{ num_questions }}</h2>
+            <div class="mb-4">
+                <img src="{{ image_url }}" alt="Bird Image" class="rounded-xl shadow-md w-full h-auto mb-4">
+                <p class="text-lg text-gray-700">What is the name of this bird?</p>
             </div>
-
-            <form method="POST" action="{{ url_for('question') }}">
-                <ul class="options">
+            <form method="POST" action="{{ url_for('question') }}" class="space-y-4">
+                <div class="space-y-2">
                     {% for option in options %}
-                    <ol><!-- radio button - option is the species code and name as a dict -->
-
-                        <input type="radio" name="option" value="{{ option.species_code }}" required> {{
-                        option.species_name }}
-                    </ol>
+                        <label class="block bg-blue-50 p-3 rounded-lg shadow-sm hover:bg-blue-100 cursor-pointer">
+                            <input type="radio" name="option" value="{{ option.species_code }}" required class="mr-2 accent-blue-500"> {{ option.species_name }}
+                        </label>
                     {% endfor %}
-                </ul>
-                <button type="submit">Submit Answer</button>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">Submit Answer</button>
             </form>
         </div>
     </main>
 </body>
-
 </html>
