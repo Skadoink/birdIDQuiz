@@ -8,13 +8,14 @@
 </head>
 <body class="bg-gradient-to-r from-blue-100 to-green-100 min-h-screen flex flex-col items-center">
     <header class="w-full bg-white shadow-md p-4 text-center">
-        <h1 class="text-3xl font-bold text-gray-700">Bird Identification Quiz</h1>
+        <h1 class="text-3xl font-bold font-mono text-gray-700">Not a Seagull</h1>
+        <p class="text-lg text-gray-600">A New Zealand seabird quiz</p>
     </header>
     <main class="flex-grow w-full max-w-2xl p-4">
         <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
             <h2 class="text-xl font-semibold mb-4 text-gray-600">Question {{ current_question_index }} of {{ num_questions }}</h2>
             <div class="mb-4">
-                <img src="{{ image_url }}" alt="Bird Image" class="rounded-xl shadow-md w-full h-auto mb-4">
+                <img src="{{ image_url }}" alt="Bird Image" class="rounded-xl shadow-md max-w-full h-auto mb-4">
                 <p class="text-lg text-gray-700">What is the name of this bird?</p>
             </div>
             <form method="POST" action="{{ url_for('question') }}" class="space-y-4">

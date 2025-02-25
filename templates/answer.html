@@ -1,55 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Answer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-
-    <style>
-        .correct {
-            color: green;
-            font-weight: bold;
-        }
-
-        .incorrect {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+    <title>Not a Seagull - Answer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/out.css') }}">
 </head>
-
-<body>
-    <header>
-        <h1>Bird Quiz</h1>
+<body class="bg-gradient-to-r from-blue-100 to-green-100 min-h-screen flex flex-col items-center">
+    <header class="w-full bg-white shadow-md p-4 text-center">
+        <h1 class="text-3xl font-bold font-mono text-gray-700">Not a Seagull</h1>
+        <p class="text-lg text-gray-600">A New Zealand seabird quiz</p>
     </header>
-    <main>
-        <div class="quiz-container">
-            <h2>Question {{ current_question_index }} of {{ num_questions }}</h2>
+    <main class="flex-grow w-full max-w-2xl p-4">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 text-center">
+            <h2 class="text-xl font-semibold mb-4 text-gray-600">Question {{ current_question_index }} of {{ num_questions }}</h2>
+            
+            {% if is_correct %}
+                <p class="text-green-600 text-lg font-semibold">✅ Your answer was correct!</p>
+            {% else %}
+                <p class="text-red-600 text-lg font-semibold">❌ Your answer was incorrect!</p>
+            {% endif %}
+            
+            <p class="text-gray-700 mt-2">The correct answer was: <strong>{{ correct_answer }}</strong></p>
 
-            <div class="quiz-container">
-                {% if is_correct %}
-                <p class="correct">Your answer was correct! </p>
-                {% else %}
-                <p class="incorrect">Your answer was incorrect!</p>
-                {% endif %}
-
-                <p>The correct answer was: <strong>{{ correct_answer }}</strong></p>
-
-                <iframe src="{{ embed_url }}" frameborder="0" allowfullscreen style="width: 100%; height: 400px;">
-                </iframe>
-
-                {% if current_question_index == num_questions %}
-                <form action="{{ url_for('answer') }}" method="POST">
-                    <button type="submit" name="endButton">Finish</button>
-                </form>
-                {% else %}
-                <form action="{{ url_for('answer') }}" method="POST">
-                    <button type="submit" name="nextButton">Next Question</button>
-                </form>
-                {% endif %}
+            <div class="mt-4">
+                <iframe src="{{ embed_url }}" frameborder="0" allowfullscreen class="w-full h-80 rounded-xl shadow-md"></iframe>
             </div>
-</body>
 
+            <form action="{{ url_for('answer') }}" method="POST" class="mt-6">
+                {% if current_question_index == num_questions %}
+                    <button type="submit" name="endButton" class="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition">
+                        Finish Quiz
+                    </button>
+                {% else %}
+                    <button type="submit" name="nextButton" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                        Next Question
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+    </main>
+</body>
 </html>
