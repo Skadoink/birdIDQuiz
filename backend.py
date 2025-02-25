@@ -127,7 +127,7 @@ class QuizBuilder:
             if speccode in file:
                 with open(join(CSV_FOLDER, file), "r", encoding="utf8") as f:
                     reader = csv.reader(f)
-                    data = list(reader)
+                    data = list(reader)[1:]
                     if len(data) == 0:
                         return None
                     imageID = random.choice(data)[0]
