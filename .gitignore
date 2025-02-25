@@ -1,5 +1,6 @@
 /species_CSVs
 /nz_species_CSVs_202501
 /instance
+/node_modules
 *.pyc
 *_session
