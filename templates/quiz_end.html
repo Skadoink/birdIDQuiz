@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz End</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <title>Quiz Completed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/out.css') }}">
 </head>
+<body class="bg-gradient-to-r from-blue-100 to-green-100 min-h-screen flex flex-col items-center">
+    <header class="w-full bg-white shadow-md p-4 text-center">
+        <h1 class="text-3xl font-bold font-mono text-gray-700">Quiz Completed!</h1>
+    </header>
 
-<body>
-    <main class="quiz-container">
-        <h1>Quiz Completed!</h1>
-        <p>Your score: {{ num_correct_answers }}/{{ num_questions }}</p>
+    <main class="flex-grow w-full max-w-3xl p-4 text-center">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <p class="text-xl font-semibold text-gray-700">Your Score: 
+                <span class="font-bold">{{ num_correct_answers }}/{{ num_questions }}</span>
+            </p>
 
-        <form action="/" method="GET" style="text-align: center; margin-top: 20px;">
-            <button type="submit">Home</button>
-        </form>
+            <form action="/" method="GET" class="mt-4">
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
+                    Home
+                </button>
+            </form>
+        </div>
     </main>
 
-    <!-- Incorrectly Answered Section -->
-    <section>
-        <h3 style="color: red;">Incorrectly Answered</h3>
+    <!-- Image Sections Take More Width -->
+    <section class="w-full max-w-5xl px-4 mb-6">
+        <h3 class="text-2xl font-semibold text-red-500 text-center">Incorrectly Answered</h3>
         {% if incorrect_questions %}
-        <div class="images-container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {% for question in incorrect_questions %}
-            <div class="image-card">
-                <iframe src="{{ question.embed_URL }}" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+            <div class="bg-white p-2 rounded-lg shadow-lg">
+                <iframe src="{{ question.embed_URL }}" frameborder="0" allowfullscreen class="w-full h-100 rounded-lg"></iframe>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <p>No questions were answered incorrectly.</p>
+        <p class="text-gray-600 text-center">No questions were answered incorrectly.</p>
         {% endif %}
     </section>
 
-    <!-- Correctly Answered Section -->
-    <section>
-        <h3 style="color: green;">Correctly Answered</h3>
+    <section class="w-full max-w-5xl px-4">
+        <h3 class="text-2xl font-semibold text-green-500 text-center">Correctly Answered</h3>
         {% if correct_questions %}
-        <div class="images-container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {% for question in correct_questions %}
-            <div class="image-card">
-                <iframe src="{{ question.embed_URL }}" frameborder="0" allowfullscreen style="height: 400px;"></iframe>
+            <div class="bg-white p-2 rounded-lg shadow-lg">
+                <iframe src="{{ question.embed_URL }}" frameborder="0" allowfullscreen class="w-full h-100 rounded-lg"></iframe>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <p>No questions were answered correctly.</p>
+        <p class="text-gray-600 text-center">No questions were answered correctly.</p>
         {% endif %}
     </section>
 
-    <form action="/" method="GET" style="text-align: center; margin-top: 20px;">
-        <button type="submit">Home</button>
+    <form action="/" method="GET" class="mt-6">
+        <button type="submit" class="w-48 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition mb-6">
+            Home
+        </button>
     </form>
 </body>
-
 </html>
