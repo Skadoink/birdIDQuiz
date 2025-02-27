@@ -56,7 +56,7 @@ class QuizBuilder:
         @param species: list of species names
         @param num_questions: number of questions in the quiz
         """
-        self.species_names = species_names
+        self.species_names = [species_name.replace(" ❌", "") for species_name in species_names]
         self.num_questions = num_questions
         self.questions = []
         self.correct_questions = []
