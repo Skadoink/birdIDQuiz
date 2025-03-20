@@ -54,7 +54,6 @@ function populateSpeciesList(speciesList) {
 
 // Function to add a species to the selectedSpecies array and display it
 function addSpecies(species) {
-  species += species.includes("❌") ? "" : " ❌";
   selectedSpecies.push(species);
   const selectedSpeciesDiv = document.getElementById('selectedSpecies');
   const speciesItem = document.createElement('div');

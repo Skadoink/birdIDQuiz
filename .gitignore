@@ -4,3 +4,4 @@
 /node_modules
 *.pyc
 *_session
+.DS_Store
