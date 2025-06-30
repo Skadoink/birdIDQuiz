@@ -65,7 +65,7 @@ def question():
         else:
             session["quiz"]["incorrect_questions"].append(current_question.to_dict())
 
-        return redirect(url_for("answer"))
+        return redirect(url_for("answer"), code=307) # 307 uses POST to redirect, so we can identify the request as an answer submission
 
     return render_template(
         "question.html",
@@ -79,6 +79,10 @@ def question():
 @app.route("/answer", methods=["GET", "POST"])
 def answer():
     quiz = QuizBuilder.from_dict(session["quiz"])
+    if request.method != "POST": # if the user just navigated to this page, we need to redirect them to the question page
+        if quiz.current_question_index + 1 >= quiz.num_questions:
+            return redirect(url_for("quiz_end"))
+        return redirect(url_for("question"))
     if request.method == "POST" and request.form.get("endButton") != None:
         return redirect(url_for("quiz_end"))
     elif request.method == "POST" and request.form.get("nextButton") != None:
