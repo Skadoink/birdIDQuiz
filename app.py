@@ -55,8 +55,8 @@ def question():
     current_question = QuizBuilder.from_dict(session["quiz"]).get_current_question()
 
     if request.method == "POST":
+        #TODO: Only increment if the question hasn't been answered yet
         selected_option = request.form["option"]
-
         is_correct = selected_option == current_question.speccode
         session["is_correct"] = is_correct
         if is_correct:
@@ -69,7 +69,7 @@ def question():
 
     return render_template(
         "question.html",
-        current_question_index=session["quiz"]["current_question_index"] + 1,
+        current_question_index=session["quiz"]["current_question_index"],
         num_questions=session["quiz"]["num_questions"],
         image_url=current_question.image_URL,
         options=current_question.species_options,
@@ -79,25 +79,48 @@ def question():
 @app.route("/answer", methods=["GET", "POST"])
 def answer():
     quiz = QuizBuilder.from_dict(session["quiz"])
-    if request.method != "POST": # if the user just navigated to this page, we need to redirect them to the question page
+
+    # Prevent direct GET requests to /answer
+    if request.method != "POST":
         if quiz.current_question_index + 1 >= quiz.num_questions:
             return redirect(url_for("quiz_end"))
         return redirect(url_for("question"))
-    if request.method == "POST" and request.form.get("endButton") != None:
+
+    # If it's the last question and they clicked End
+    if request.form.get("endButton") is not None:
         return redirect(url_for("quiz_end"))
-    elif request.method == "POST" and request.form.get("nextButton") != None:
-        quiz.next_question()
-        session["quiz"] = quiz.to_dict()
-        session.modified = True
+    
+     # Read the question index the user submitted from the hidden form input
+    try:
+        form_index = int(request.form.get("question_index"))
+    except (TypeError, ValueError):
         return redirect(url_for("question"))
+
+    # If it's not already answered, evaluate and store
+    if form_index == quiz.current_question_index and form_index not in quiz.answered_questions:
+        selected_option = request.form.get("option")
+        current_question = quiz.get_current_question()
+        is_correct = selected_option == current_question.speccode
+        quiz.answered_questions[form_index] = is_correct
+        session["is_correct"] = is_correct
+        quiz.next_question()
+    else:
+        # Prevent duplicate answers or skipped state
+        session["is_correct"] = quiz.answered_questions.get(form_index, False)
+
+    # Save the updated quiz state
+    session["quiz"] = quiz.to_dict()
+    session.modified = True
+
     return render_template(
         "answer.html",
-        current_question_index=quiz.current_question_index + 1,
+        current_question_index=form_index + 1,
         num_questions=quiz.num_questions,
         is_correct=session["is_correct"],
-        correct_answer=quiz.get_current_question().spec_name,
-        embed_url=quiz.get_current_question().embed_URL,
+        correct_answer=quiz.questions[form_index].spec_name,
+        embed_url=quiz.questions[form_index].embed_URL,
     )
+
 
 
 @app.route("/quiz_end", methods=["GET", "POST"])

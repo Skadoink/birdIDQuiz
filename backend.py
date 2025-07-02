@@ -58,7 +58,8 @@ class QuizBuilder:
         """
         self.species_names = species_names
         self.num_questions = num_questions
-        self.questions = []
+        self.questions = [] 
+        self.answered_questions = {} #TODO: Could we replace correct and incorrect questions with this?
         self.correct_questions = []
         self.incorrect_questions = []
         self.no_image_species = [] # redundant when we know all our CSVs have images, but might be useful again in the future
