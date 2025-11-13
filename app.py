@@ -97,16 +97,16 @@ def answer():
         return redirect(url_for("question"))
 
     # If it's not already answered, evaluate and store
-    if form_index == quiz.current_question_index and form_index not in quiz.answered_questions:
+    if form_index == quiz.current_question_index and str(form_index) not in quiz.answered_questions:
         selected_option = request.form.get("option")
         current_question = quiz.get_current_question()
         is_correct = selected_option == current_question.speccode
-        quiz.answered_questions[form_index] = is_correct
+        quiz.answered_questions[str(form_index)] = is_correct
         session["is_correct"] = is_correct
         quiz.next_question()
     else:
         # Prevent duplicate answers or skipped state
-        session["is_correct"] = quiz.answered_questions.get(form_index, False)
+        session["is_correct"] = quiz.answered_questions.get(str(form_index), False) #TODO: could use None to indicate not answered, and handle in template
 
     # Save the updated quiz state
     session["quiz"] = quiz.to_dict()

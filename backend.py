@@ -147,6 +147,7 @@ class QuizBuilder:
             "species_names": self.species_names,
             "num_questions": self.num_questions,
             "questions": [q.to_dict() for q in self.questions],
+            "answered_questions": self.answered_questions,
             "correct_questions": [q.to_dict() for q in self.correct_questions],
             "incorrect_questions": [q.to_dict() for q in self.incorrect_questions],
             "num_correct_answers": self.num_correct_answers,
@@ -156,6 +157,8 @@ class QuizBuilder:
     def from_dict(d):
         quiz = QuizBuilder(d["species_names"], d["num_questions"])
         quiz.questions = [Question.from_dict(q) for q in d["questions"]]
+        # Restore answered_questions if present so answered state persists
+        quiz.answered_questions = d.get("answered_questions", {})
         quiz.correct_questions = [Question.from_dict(q) for q in d["correct_questions"]]
         quiz.incorrect_questions = [Question.from_dict(q) for q in d["incorrect_questions"]]
         quiz.num_correct_answers = d["num_correct_answers"]
