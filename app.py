@@ -82,7 +82,7 @@ def answer():
 
     # Prevent direct GET requests to /answer
     if request.method != "POST":
-        if quiz.current_question_index + 1 >= quiz.num_questions:
+        if quiz.current_question_index >= quiz.num_questions:
             return redirect(url_for("quiz_end"))
         return redirect(url_for("question"))
 
