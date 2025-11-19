@@ -130,10 +130,10 @@ def quiz_end():
     quiz = QuizBuilder.from_dict(session["quiz"])
     return render_template(
         "quiz_end.html",
-        num_correct_answers=quiz.num_correct_answers,
+        num_correct_answers=list(quiz.answered_questions.values()).count(True),
         num_questions=quiz.num_questions,
-        incorrect_questions=quiz.incorrect_questions,
-        correct_questions=quiz.correct_questions,
+        incorrect_questions=[quiz.questions[int(q)] for q in quiz.answered_questions.keys() if quiz.answered_questions[q] == False],
+        correct_questions=[quiz.questions[int(q)] for q in quiz.answered_questions.keys() if quiz.answered_questions[q] == True],
     )
 
 
