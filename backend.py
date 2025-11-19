@@ -59,9 +59,7 @@ class QuizBuilder:
         self.species_names = species_names
         self.num_questions = num_questions
         self.questions = [] 
-        self.answered_questions = {} #TODO: Could we replace correct and incorrect questions with this?
-        self.correct_questions = []
-        self.incorrect_questions = []
+        self.answered_questions = {}
         self.no_image_species = [] # redundant when we know all our CSVs have images, but might be useful again in the future
         self.num_correct_answers = 0
         self.current_question_index = 0
@@ -148,8 +146,6 @@ class QuizBuilder:
             "num_questions": self.num_questions,
             "questions": [q.to_dict() for q in self.questions],
             "answered_questions": self.answered_questions,
-            "correct_questions": [q.to_dict() for q in self.correct_questions],
-            "incorrect_questions": [q.to_dict() for q in self.incorrect_questions],
             "num_correct_answers": self.num_correct_answers,
             "current_question_index": self.current_question_index,
         }
@@ -159,8 +155,6 @@ class QuizBuilder:
         quiz.questions = [Question.from_dict(q) for q in d["questions"]]
         # Restore answered_questions if present so answered state persists
         quiz.answered_questions = d.get("answered_questions", {})
-        quiz.correct_questions = [Question.from_dict(q) for q in d["correct_questions"]]
-        quiz.incorrect_questions = [Question.from_dict(q) for q in d["incorrect_questions"]]
         quiz.num_correct_answers = d["num_correct_answers"]
         quiz.current_question_index = d["current_question_index"]
         return quiz

@@ -52,21 +52,12 @@ def home():
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
-    current_question = QuizBuilder.from_dict(session["quiz"]).get_current_question()
-
     if request.method == "POST":
-        #TODO: Only increment if the question hasn't been answered yet
-        selected_option = request.form["option"]
-        is_correct = selected_option == current_question.speccode
-        session["is_correct"] = is_correct
-        if is_correct:
-            session["quiz"]["num_correct_answers"] += 1
-            session["quiz"]["correct_questions"].append(current_question.to_dict())
-        else:
-            session["quiz"]["incorrect_questions"].append(current_question.to_dict())
-
+        # Prevent direct POST requests to /question, handle via /answer instead
         return redirect(url_for("answer"), code=307) # 307 uses POST to redirect, so we can identify the request as an answer submission
 
+    # GET request indicates legitimate navigation to the question page
+    current_question = QuizBuilder.from_dict(session["quiz"]).get_current_question()
     return render_template(
         "question.html",
         current_question_index=session["quiz"]["current_question_index"],
@@ -106,6 +97,7 @@ def answer():
         quiz.next_question()
     else:
         # Prevent duplicate answers or skipped state
+        # Just retrieve the previous answer state
         session["is_correct"] = quiz.answered_questions.get(str(form_index), False) #TODO: could use None to indicate not answered, and handle in template
 
     # Save the updated quiz state
