@@ -123,7 +123,7 @@ class QuizBuilder:
         THIS_FOLDER = Path(__file__).parent.resolve()
         CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202501"
         for file in os.listdir(CSV_FOLDER):
-            if speccode in file:
+            if speccode == file.split(".")[0]:
                 with open(join(CSV_FOLDER, file), "r", encoding="utf8") as f:
                     reader = csv.reader(f)
                     data = list(reader)[1:]
