@@ -52,9 +52,19 @@ def home():
 
 @app.route("/question", methods=["GET", "POST"])
 def question():
+    """
+    Handles navigation to the current quiz question.
+    If a POST request is received, it redirects to the /answer route using a 307 redirect.
+    The 307 status code is used to preserve the original POST method and body, which is essential for answer submission
+    because it ensures that form data is not lost during the redirect and the user's answer can be processed correctly.
+    """
     if request.method == "POST":
         # Prevent direct POST requests to /question, handle via /answer instead
         return redirect(url_for("answer"), code=307) # 307 uses POST to redirect, so we can identify the request as an answer submission
+
+    # Guard: redirect to home if quiz is not in session
+    if "quiz" not in session:
+        return redirect(url_for("home"))
 
     # GET request indicates legitimate navigation to the question page
     current_question = QuizBuilder.from_dict(session["quiz"]).get_current_question()
@@ -69,6 +79,10 @@ def question():
 
 @app.route("/answer", methods=["GET", "POST"])
 def answer():
+    # Guard: redirect to home if quiz is not in session
+    if "quiz" not in session:
+        return redirect(url_for("home"))
+    
     quiz = QuizBuilder.from_dict(session["quiz"])
 
     # Prevent direct GET requests to /answer
@@ -117,8 +131,15 @@ def answer():
 
 @app.route("/quiz_end", methods=["GET", "POST"])
 def quiz_end():
+    # Guard: redirect to home if quiz is not in session
+    if "quiz" not in session:
+        return redirect(url_for("home"))
+    
+    # Handle End button to go back to home
     if request.method == "GET" and request.form.get("endButton") != None:
         return redirect(url_for("home"))
+    
+    # Load end of quiz page
     quiz = QuizBuilder.from_dict(session["quiz"])
     return render_template(
         "quiz_end.html",
