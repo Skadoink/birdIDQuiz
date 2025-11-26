@@ -75,7 +75,7 @@ class QuizBuilder:
         species_codes_to_names = {}
         species_names_to_codes = {}
         THIS_FOLDER = Path(__file__).parent.resolve()
-        CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202501"
+        CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202511"
         for file in os.listdir(CSV_FOLDER):
             with open(join(CSV_FOLDER, file), "r", encoding="utf8") as f:
                 reader = csv.reader(f)
@@ -121,7 +121,7 @@ class QuizBuilder:
         @param speccode: species code
         """
         THIS_FOLDER = Path(__file__).parent.resolve()
-        CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202501"
+        CSV_FOLDER = THIS_FOLDER / "nz_species_CSVs_202511"
         for file in os.listdir(CSV_FOLDER):
             if speccode == file.split(".")[0]:
                 with open(join(CSV_FOLDER, file), "r", encoding="utf8") as f:
