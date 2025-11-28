@@ -36,6 +36,13 @@ for spec in species_codes:
         print(f"{spec}.csv already exists and has images.")
         continue
 
+    #second, check if the species is in the seabird or shorebird lists
+    with open("seabirds_and_shorebirds.txt", "r") as f:
+        seabird_shorebird_codes = [line.strip() for line in f.readlines()]
+    if spec not in seabird_shorebird_codes:
+        print(f"{spec} is not a seabird or shorebird, skipping.")
+        continue
+
     export_button_url = (
         "https://media.ebird.org/api/v2/export.csv?taxonCode="
         + spec
