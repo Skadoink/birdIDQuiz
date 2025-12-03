@@ -60,7 +60,6 @@ class QuizBuilder:
         self.num_questions = num_questions
         self.questions = [] 
         self.answered_questions = {}
-        self.no_image_species = [] # redundant when we know all our CSVs have images, but might be useful again in the future
         self.num_correct_answers = 0
         self.current_question_index = 0
         self.quiz_species_codes_to_names = self.find_spec_codes()

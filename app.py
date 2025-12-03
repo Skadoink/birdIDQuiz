@@ -17,7 +17,7 @@ def home():
     if request.method == "POST" and request.form.get("submitButton"):
         if request.form.get("selectedSpeciesInput") == "":
             return render_template(
-                "index.html", no_image_species=[], selected_species=""
+                "index.html", selected_species=""
             )
         session["selected_species"] = request.form.get(
             "selectedSpeciesInput"
@@ -25,19 +25,6 @@ def home():
         num_questions = int(request.form.get("num_questions"))
         # Process the user input and start the quiz
         quiz = QuizBuilder(session["selected_species"].split(","), num_questions)
-        if quiz.no_image_species: # redundant when we know all our CSVs have images, but might be useful again in the future
-            for species in quiz.no_image_species:
-                session["selected_species"] = session["selected_species"].replace(
-                    species + ",", ""
-                )
-                session["selected_species"] = session["selected_species"].replace(
-                    "," + species, ""
-                )  # in case it's the last species
-            return render_template(
-                "index.html",
-                no_image_species=quiz.no_image_species,
-                selected_species=session.get("selected_species", ""),
-            )
         # store the quiz in the session
         session["quiz"] = quiz.to_dict()
         return redirect(url_for("question"))
@@ -45,7 +32,6 @@ def home():
     return render_template(
         "index.html",
         all_species = ",".join(backend.species_names_to_codes.keys()),
-        no_image_species=[],
         selected_species=session.get("selected_species", ""),
     )
 

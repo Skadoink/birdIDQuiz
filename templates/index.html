@@ -18,16 +18,6 @@
         <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
             <h2 class="text-xl font-semibold text-gray-600 mb-4">Welcome</h2>
 
-            {% if no_image_species %}
-            <p class="text-red-500 font-semibold mb-4">
-                No images found for the following species. Are they extinct/cryptic?
-                <br>
-                {% for species in no_image_species %}
-                {{ species }}<br>
-                {% endfor %}
-            </p>
-            {% endif %}
-
             <form method="POST" action="/" onkeydown="return event.key != 'Enter';" class="space-y-4">
                 <div>
                     <label for="species" class="block text-gray-700 font-medium">Bird Species:</label>
