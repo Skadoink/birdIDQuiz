@@ -58,6 +58,10 @@ function addSpecies(species) {
   const selectedSpeciesDiv = document.getElementById('selectedSpecies');
   const speciesItem = document.createElement('div');
   speciesItem.textContent = species;
+  // Add remove button to each species item
+  speciesItem.classList.add('selected-species-item');
+  speciesItem.title = 'Click to remove';
+  
   selectedSpeciesDiv.appendChild(speciesItem);
   // Update the hidden input with the array as a comma-separated string
   document.getElementById('selectedSpeciesInput').value = selectedSpecies.join(',');
