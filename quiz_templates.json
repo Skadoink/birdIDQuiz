@@ -9,69 +9,136 @@
             "ausgan1",
             "whfter1"
         ],
-        "image_url": ""
-    },
-    {
-        "id": "prions",
-        "title": "Prions",
-        "subtitle": "Small blue-white petrels",
-        "species": [],
-        "image_url": ""
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/621367786/1200"
     },
     {
         "id": "great_albatrosses",
         "title": "Great Albatrosses",
         "subtitle": "The giants of the Southern Ocean",
-        "species": [],
-        "image_url": ""
-    },
-    {
-        "id": "storm_petrels",
-        "title": "Storm Petrels",
-        "subtitle": "Tiny tubenoses with fluttering flight",
-        "species": [],
-        "image_url": ""
-    },
-    {
-        "id": "cookilaria",
-        "title": "Cookilaria",
-        "subtitle": "A subgenus of pterodroma with several similar species",
-        "species": [],
-        "image_url": ""
+        "species": [
+            "royalb3",
+            "royalb2",
+            "antalb1",
+            "wanalb1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600802/1200"
     },
     {
         "id": "mollymawks",
         "title": "Mollymawks",
         "subtitle": "Medium-sized albatrosses with colourful bills",
-        "species": [],
-        "image_url": ""
+        "species": [
+            "whcalb1",
+            "salalb1",
+            "bulalb2",
+            "bkbalb",
+            "gyhalb",
+            "shyalb2"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636592522/1200"
     },
     {
-        "id": "fluttons",
-        "title": "Fluttons",
-        "subtitle": "Fluttering and Hutton's shearwaters, two similar coastal species",
-        "species": [],
-        "image_url": ""
+        "id": "prions",
+        "title": "Prions",
+        "subtitle": "Small blue-white petrels",
+        "species": [
+            "faipri1",
+            "brbpri1",
+            "dovpri1",
+            "fulpri1",
+            "slbpri1",
+            "salpri2"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/639445801/1200"
+    },
+    {
+        "id": "storm_petrels",
+        "title": "Storm Petrels",
+        "subtitle": "Tiny tubenoses with fluttering flight",
+        "species": [
+            "wfspet",
+            "gybstp1",
+            "wispet",
+            "nezstp",
+            "bbspet1",
+            "wbspet1",
+            "lcspet1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/610653928/1200"
     },
     {
         "id": "skuas",
         "title": "Skuas",
         "subtitle": "Powerful predatory seabirds",
-        "species": [],
-        "image_url": ""
+        "species": [
+            "brnsku3",
+            "sopsku1",
+            "parjae",
+            "pomjae",
+            "lotjae"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600769/1200"
+    },
+    {
+        "id": "fluttons",
+        "title": "Fluttons",
+        "subtitle": "Fluttering and Hutton's shearwaters, two similar coastal species",
+        "species": [
+            "flushe1",
+            "hutshe1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/81829671/1200"
     },
     {
         "id": "procellaria_and_friends",
         "title": "Procellaria and Friends",
         "subtitle": "Large, dark petrels",
-        "species": [],
-        "image_url": ""
+        "species": [
+            "whcpet1",
+            "wespet1",
+            "parpet1",
+            "grapet",
+            "flfshe",
+            "grwpet2"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635416674/1200"
     },
     {
         "id": "sooty_and_short_tailed_shearwaters",
         "title": "Sooty and Short-Tailed Shearwaters",
         "subtitle": "NZ's most common seabird and its rarer Australian cousin",
-        "species": [],
-        "image_url": ""
+        "species": [
+            "sooshe",
+            "shtshe"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635498753/1200"
+    },
+    {
+        "id": "crested_penguins",
+        "title": "Crested Penguins",
+        "subtitle": "Medium-sized penguins with yellow crests",
+        "species": [
+            "fiopen1",
+            "snapen1",
+            "bicpen1",
+            "rocpen3",
+            "roypen1",
+            "rocpen4",
+            "macpen1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/427568301/1200"
+    },
+    {
+        "id": "cookilaria",
+        "title": "Cookilaria",
+        "subtitle": "A subgenus of pterodroma with several similar species",
+        "species": [
+            "coopet",
+            "pycpet",
+            "chapet1",
+            "bkwpet",
+            "motpet"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/631731220/1200"
     }
 ]
