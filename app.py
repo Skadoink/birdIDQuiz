@@ -33,6 +33,8 @@ def home():
         "index.html",
         all_species = ",".join(backend.species_names_to_codes.keys()),
         selected_species=session.get("selected_species", ""),
+        quiz_templates=backend.QUIZ_TEMPLATES,
+        species_codes_to_names=backend.species_codes_to_names,
     )
 
 

@@ -52,7 +52,10 @@ function populateSpeciesList(speciesList) {
   });
 }
 
-// Function to add a species to the selectedSpecies array and display it
+/**
+ * Adds a species to the selectedSpecies array and display it
+ * @param {string} species - The species to add (species name, not species code)
+ *  */ 
 function addSpecies(species) {
   selectedSpecies.push(species);
   const selectedSpeciesDiv = document.getElementById('selectedSpecies');
@@ -110,4 +113,38 @@ selectedSpeciesDiv.addEventListener('click', function (event) {
     removeSpecies(species);
   }
 });
+
+// Function to select a template and populate the form
+function selectTemplate(templateId) {
+  // Get templates from the hidden input
+  const templatesData = document.getElementById('quizTemplatesData').value;
+  const templates = JSON.parse(templatesData);
+  
+  // Get species code to name mapping from hidden input
+  const speciesCodesData = document.getElementById('speciesCodesToNamesData').value;
+  const speciesCodesToNames = JSON.parse(speciesCodesData);
+  
+  // Find the template by template ID
+  const template = templates.find(t => t.id === templateId);
+  if (!template || !template.species || template.species.length === 0) {
+    console.warn('Template not found or has no species:', templateId);
+    return;
+  }
+
+  // Clear existing selections
+  selectedSpecies = [];
+  document.getElementById('selectedSpecies').innerHTML = '';
+
+  // Add each species from the template using the species codes
+  template.species.forEach(speciesCode => {
+    // Look up the species name using the code-to-name mapping
+    const speciesName = speciesCodesToNames[speciesCode];
+    
+    if (speciesName) {
+      addSpecies(speciesName);
+    } else {
+      console.warn('Species name not found for code:', speciesCode);
+    }
+  });
+}
 

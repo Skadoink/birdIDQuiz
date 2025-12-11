@@ -6,6 +6,7 @@ import random
 import urllib.request
 from bs4 import BeautifulSoup
 from pathlib import Path
+import json
 
 class Question:
     def __init__(self, speccode, image_URL, species_options):
@@ -159,5 +160,19 @@ class QuizBuilder:
         return quiz
     
     
+# Template quizzes for quick access
+# Format: { "id": str, "title": str, "subtitle": str, "species": [str], "image_url": str }
+def load_quiz_templates():
+    """Load quiz templates from JSON file."""
+    THIS_FOLDER = Path(__file__).parent.resolve()
+    TEMPLATES_FILE = THIS_FOLDER / "quiz_templates.json"
+    try:
+        with open(TEMPLATES_FILE, "r", encoding="utf8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+QUIZ_TEMPLATES = load_quiz_templates()
+
 #dictionary of species codes and names
 species_codes_to_names, species_names_to_codes = QuizBuilder.build_species_dicts()

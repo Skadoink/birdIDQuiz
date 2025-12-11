@@ -1,0 +1,77 @@
+[
+    {
+        "id": "begginer_basics",
+        "title": "Beginner Basics",
+        "subtitle": "Most common seabirds around coastal Aotearoa",
+        "species": [
+            "kelgul",
+            "silgul2",
+            "ausgan1",
+            "whfter1"
+        ],
+        "image_url": ""
+    },
+    {
+        "id": "prions",
+        "title": "Prions",
+        "subtitle": "Small blue-white petrels",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "great_albatrosses",
+        "title": "Great Albatrosses",
+        "subtitle": "The giants of the Southern Ocean",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "storm_petrels",
+        "title": "Storm Petrels",
+        "subtitle": "Tiny tubenoses with fluttering flight",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "cookilaria",
+        "title": "Cookilaria",
+        "subtitle": "A subgenus of pterodroma with several similar species",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "mollymawks",
+        "title": "Mollymawks",
+        "subtitle": "Medium-sized albatrosses with colourful bills",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "fluttons",
+        "title": "Fluttons",
+        "subtitle": "Fluttering and Hutton's shearwaters, two similar coastal species",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "skuas",
+        "title": "Skuas",
+        "subtitle": "Powerful predatory seabirds",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "procellaria_and_friends",
+        "title": "Procellaria and Friends",
+        "subtitle": "Large, dark petrels",
+        "species": [],
+        "image_url": ""
+    },
+    {
+        "id": "sooty_and_short_tailed_shearwaters",
+        "title": "Sooty and Short-Tailed Shearwaters",
+        "subtitle": "NZ's most common seabird and its rarer Australian cousin",
+        "species": [],
+        "image_url": ""
+    }
+]
