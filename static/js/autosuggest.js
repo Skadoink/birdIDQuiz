@@ -153,26 +153,37 @@ function selectTemplate(templateId) {
  * Seabird (sb), Shorebird (sh), Seabird Advanced (sba), Shorebird Advanced (sha)
  * @param {*} key section key, one of 'sb', 'sh', 'sba', 'sha' 
  */
-function toggleAccordion(key) {
-    const panel = document.getElementById(`panel-${key}`);
-    const allPanels = document.querySelectorAll('.accordion-panel');
+function toggleSection(id) {
+    const section = document.getElementById(id);
+    const chevron = document.getElementById("chevron-" + id);
 
-    // Auto-close all other sections
-    allPanels.forEach(p => {
-        if (p !== panel) {
-            p.style.maxHeight = null;
+    const allSections = document.querySelectorAll("[id^='seabirds'], [id^='shorebirds']");
+    const allChevrons = document.querySelectorAll("svg[id^='chevron-']");
+
+    // Close all sections except this one
+    allSections.forEach(s => {
+        if (s.id !== id) {
+            s.style.maxHeight = "0px";
         }
     });
 
-    // Toggle this panel
-    if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-    } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
+    allChevrons.forEach(c => {
+        if (c.id !== "chevron-" + id) {
+            c.classList.remove("rotate-180");
+        }
+    });
 
-        // Auto-scroll after animation
+    // Toggle this section
+    if (section.style.maxHeight === "0px" || section.style.maxHeight === "") {
+        section.style.maxHeight = section.scrollHeight + "px";
+        chevron.classList.add("rotate-180");
+
+        // Auto-scroll into view
         setTimeout(() => {
-            panel.parentElement.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 250); // waits until partway through animation
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 120);
+    } else {
+        section.style.maxHeight = "0px";
+        chevron.classList.remove("rotate-180");
     }
 }
