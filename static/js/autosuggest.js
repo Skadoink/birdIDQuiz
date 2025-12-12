@@ -156,34 +156,45 @@ function selectTemplate(templateId) {
 function toggleSection(id) {
     const section = document.getElementById(id);
     const chevron = document.getElementById("chevron-" + id);
+    const container = section.closest(".accordion-item");
+    
+    const allSections = document.querySelectorAll(".accordion-content");
+    const allChevrons = document.querySelectorAll(".accordion-chevron");
 
-    const allSections = document.querySelectorAll("[id^='seabirds'], [id^='shorebirds']");
-    const allChevrons = document.querySelectorAll("svg[id^='chevron-']");
+    const isOpening = section.style.maxHeight === "0px" || !section.style.maxHeight;
 
-    // Close all sections except this one
+    // STEP 1 — close all other sections first
     allSections.forEach(s => {
         if (s.id !== id) {
             s.style.maxHeight = "0px";
         }
     });
-
     allChevrons.forEach(c => {
         if (c.id !== "chevron-" + id) {
             c.classList.remove("rotate-180");
         }
     });
 
-    // Toggle this section
-    if (section.style.maxHeight === "0px" || section.style.maxHeight === "") {
+    if (!isOpening) {
+        // Closing the currently opened section — no scroll needed
+        section.style.maxHeight = "0px";
+        chevron.classList.remove("rotate-180");
+        return;
+    }
+
+    // STEP 2 — wait for the collapse animations to finish
+    // Typically matches CSS close transition: 200ms
+    setTimeout(() => {
+        // STEP 3 — open the clicked section
         section.style.maxHeight = section.scrollHeight + "px";
         chevron.classList.add("rotate-180");
 
-        // Auto-scroll into view
+        // STEP 4 — THEN scroll it into view cleanly
         setTimeout(() => {
-            section.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 120);
-    } else {
-        section.style.maxHeight = "0px";
-        chevron.classList.remove("rotate-180");
-    }
+            container.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }, 50);
+    }, 200); // match close animation duration
 }
