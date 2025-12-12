@@ -148,3 +148,31 @@ function selectTemplate(templateId) {
   });
 }
 
+/**
+ * Toggles the accordion panel for the given quiz templates section
+ * Seabird (sb), Shorebird (sh), Seabird Advanced (sba), Shorebird Advanced (sha)
+ * @param {*} key section key, one of 'sb', 'sh', 'sba', 'sha' 
+ */
+function toggleAccordion(key) {
+    const panel = document.getElementById(`panel-${key}`);
+    const allPanels = document.querySelectorAll('.accordion-panel');
+
+    // Auto-close all other sections
+    allPanels.forEach(p => {
+        if (p !== panel) {
+            p.style.maxHeight = null;
+        }
+    });
+
+    // Toggle this panel
+    if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+    } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+
+        // Auto-scroll after animation
+        setTimeout(() => {
+            panel.parentElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 250); // waits until partway through animation
+    }
+}

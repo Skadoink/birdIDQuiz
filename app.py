@@ -35,6 +35,10 @@ def home():
         selected_species=session.get("selected_species", ""),
         quiz_templates=backend.QUIZ_TEMPLATES,
         species_codes_to_names=backend.species_codes_to_names,
+        seabird_templates = backend.SEABIRDS,
+        seabird_adv_templates = backend.SEABIRDS_ADVANCED,
+        shorebird_templates = backend.SHOREBIRDS,
+        shorebird_adv_templates = backend.SHOREBIRDS_ADVANCED,
     )
 
 

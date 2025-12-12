@@ -161,7 +161,7 @@ class QuizBuilder:
     
     
 # Template quizzes for quick access
-# Format: { "id": str, "title": str, "subtitle": str, "species": [str], "image_url": str }
+# Format: { "id": str, "title": str, "subtitle": str, "section": str, "species": [str], "image_url": str }
 def load_quiz_templates():
     """Load quiz templates from JSON file."""
     THIS_FOLDER = Path(__file__).parent.resolve()
@@ -173,6 +173,10 @@ def load_quiz_templates():
         return []
 
 QUIZ_TEMPLATES = load_quiz_templates()
+SEABIRDS = [template for template in QUIZ_TEMPLATES if template.get("section") == "seabirds"]
+SEABIRDS_ADVANCED = [template for template in QUIZ_TEMPLATES if template.get("section") == "seabirds-advanced"]
+SHOREBIRDS = [template for template in QUIZ_TEMPLATES if template.get("section") == "shorebirds"]
+SHOREBIRDS_ADVANCED = [template for template in QUIZ_TEMPLATES if template.get("section") == "shorebirds-advanced"]
 
 #dictionary of species codes and names
 species_codes_to_names, species_names_to_codes = QuizBuilder.build_species_dicts()

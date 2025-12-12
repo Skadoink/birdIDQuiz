@@ -3,6 +3,7 @@
         "id": "begginer_basics",
         "title": "Beginner Basics",
         "subtitle": "Most common seabirds around coastal Aotearoa",
+        "section": "seabirds",
         "species": [
             "kelgul",
             "silgul2",
@@ -15,6 +16,7 @@
         "id": "great_albatrosses",
         "title": "Great Albatrosses",
         "subtitle": "The giants of the Southern Ocean",
+        "section": "seabirds",
         "species": [
             "royalb3",
             "royalb2",
@@ -27,6 +29,7 @@
         "id": "mollymawks",
         "title": "Mollymawks",
         "subtitle": "Medium-sized albatrosses with colourful bills",
+        "section": "seabirds",
         "species": [
             "whcalb1",
             "salalb1",
@@ -41,6 +44,7 @@
         "id": "prions",
         "title": "Prions",
         "subtitle": "Small blue-white petrels",
+        "section": "seabirds",
         "species": [
             "faipri1",
             "brbpri1",
@@ -55,6 +59,7 @@
         "id": "storm_petrels",
         "title": "Storm Petrels",
         "subtitle": "Tiny tubenoses with fluttering flight",
+        "section": "seabirds",
         "species": [
             "wfspet",
             "gybstp1",
@@ -70,6 +75,7 @@
         "id": "skuas",
         "title": "Skuas",
         "subtitle": "Powerful predatory seabirds",
+        "section": "seabirds",
         "species": [
             "brnsku3",
             "sopsku1",
@@ -83,6 +89,7 @@
         "id": "fluttons",
         "title": "Fluttons",
         "subtitle": "Fluttering and Hutton's shearwaters, two similar coastal species",
+        "section": "seabirds-advanced",
         "species": [
             "flushe1",
             "hutshe1"
@@ -93,6 +100,7 @@
         "id": "procellaria_and_friends",
         "title": "Procellaria and Friends",
         "subtitle": "Large, dark petrels",
+        "section": "seabirds-advanced",
         "species": [
             "whcpet1",
             "wespet1",
@@ -107,6 +115,7 @@
         "id": "sooty_and_short_tailed_shearwaters",
         "title": "Sooty and Short-Tailed Shearwaters",
         "subtitle": "NZ's most common seabird and its rarer Australian cousin",
+        "section": "seabirds-advanced",
         "species": [
             "sooshe",
             "shtshe"
@@ -117,6 +126,7 @@
         "id": "crested_penguins",
         "title": "Crested Penguins",
         "subtitle": "Medium-sized penguins with yellow crests",
+        "section": "seabirds-advanced",
         "species": [
             "fiopen1",
             "snapen1",
@@ -132,6 +142,7 @@
         "id": "cookilaria",
         "title": "Cookilaria",
         "subtitle": "A subgenus of pterodroma with several similar species",
+        "section": "seabirds-advanced",
         "species": [
             "coopet",
             "pycpet",
