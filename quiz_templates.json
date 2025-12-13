@@ -121,17 +121,13 @@
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600828/1200"
     },
     {
-        "id": "prions",
-        "title": "Prions",
+        "id": "prion-basics",
+        "title": "Prion Basics",
         "subtitle": "Small, blue-white petrels",
         "section": "seabirds",
         "species": [
             "faipri1",
-            "brbpri1",
-            "dovpri1",
-            "fulpri1",
-            "slbpri1",
-            "salpri2"
+            "brbpri1"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/639445801/1200"
     },
@@ -191,6 +187,21 @@
             "wanalb1"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635416654/1200"
+    },
+    {
+        "id": "prions-advanced",
+        "title": "Prions Advanced",
+        "subtitle": "The full set of small, blue-white petrels",
+        "section": "seabirds-advanced",
+        "species": [
+            "faipri1",
+            "brbpri1",
+            "dovpri1",
+            "fulpri1",
+            "slbpri1",
+            "salpri2"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/460686761/1200"
     },
     {
         "id": "jaegers",
@@ -316,6 +327,28 @@
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/450873971/1200"
     },
     {
+        "id": "tropicbirds",
+        "title": "Tropicbirds",
+        "subtitle": "Tropical seabirds with colourful trailing streamers",
+        "section": "seabirds-advanced",
+        "species": [
+            "whttro",
+            "rettro"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/611565253/1200"
+    },
+    {
+        "id": "frigatebirds",
+        "title": "Frigatebirds",
+        "subtitle": "Kleptoparasitic pirates with long, hooked bills and forked tails",
+        "section": "seabirds-advanced",
+        "species": [
+            "lesfri",
+            "grefri"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/643265228/1200"
+    },
+    {
         "id": "yellow_nosed_albatrosses",
         "title": "Yellow-nosed Albatrosses",
         "subtitle": "Two yellow-nosed mollymawks from beyond the Pacific",
@@ -325,5 +358,123 @@
             "yenalb2"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/627113087/1200"
+    },
+    {
+        "id": "shorebirds_begginer_basics",
+        "title": "Beginner Basics",
+        "subtitle": "The most common birds on our shores",
+        "section": "shorebirds",
+        "species": [
+            "varoys1",
+            "soioys1",
+            "piesti1",
+            "dobplo1",
+            "rebdot1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/111574031/1200"
+    },
+    {
+        "id": "stilts",
+        "title": "Stilts",
+        "subtitle": "Dainty long-legged waders",
+        "section": "shorebirds",
+        "species": [
+            "piesti1",
+            "blasti1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/98175681/1200"
+    },
+    {
+        "id": "oystercatchers",
+        "title": "Oystercatchers",
+        "subtitle": "Long-billed waders. Add Chatham Island oystercatcher for more difficulty",
+        "section": "shorebirds",
+        "species": [
+            "varoys1",
+            "soioys1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/610055036/1200"
+    },
+    {
+        "id": "dotterels_and_plovers",
+        "title": "Dotterels and Plovers",
+        "subtitle": "The resident plovers of our shores and wetlands",
+        "section": "shorebirds",
+        "species": [
+            "dobplo1",
+            "rebdot1",
+            "blfdot1",
+            "shoplo1",
+            "pagplo"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/302547021/1200"
+    },
+    {
+        "id": "herons",
+        "title": "Herons",
+        "subtitle": "Large, graceful wading birds",
+        "section": "shorebirds",
+        "species": [
+            "whfher1",
+            "greegr",
+            "pacreh1",
+            "runher1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/638608050/1200"
+    },
+    {
+        "id": "tattlers",
+        "title": "Tattlers",
+        "subtitle": "Tattlers",
+        "section": "shorebirds-advanced",
+        "species": [
+            "wantat1",
+            "gyttat1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/409706811/1200"
+    },
+    {
+        "id": "whimbrels",
+        "title": "Whimbrels",
+        "subtitle": "Whimbrels and curlews",
+        "section": "shorebirds-advanced",
+        "species": [
+            "whimbr5",
+            "faecur",
+            "whimbr3",
+            "litcur"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/302813101/1200"
+    },
+    {
+        "id": "stints",
+        "title": "Stints",
+        "subtitle": "Tiny, easily-missed shorebirds",
+        "section": "shorebirds-advanced",
+        "species": [
+            "rensti",
+            "lotsti",
+            "litsti"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/640073259/1200"
+    },
+    {
+        "id": "sandpipers",
+        "title": "Sandpipers",
+        "subtitle": "Sandpipers",
+        "section": "shorebirds-advanced",
+        "species": [
+            "shtsan",
+            "cursan",
+            "pecsan",
+            "comsan",
+            "marsan",
+            "tersan",
+            "wessan",
+            "stisan",
+            "brbsan",
+            "bubsan"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/477633261/1200"
     }
 ]
