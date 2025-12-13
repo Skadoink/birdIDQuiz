@@ -2,7 +2,7 @@
     {
         "id": "begginer_basics",
         "title": "Beginner Basics",
-        "subtitle": "Most common seabirds around coastal Aotearoa",
+        "subtitle": "Four most common seabirds around coastal Aotearoa",
         "section": "seabirds",
         "species": [
             "kelgul",
@@ -13,9 +13,61 @@
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/621367786/1200"
     },
     {
+        "id": "terns",
+        "title": "Terns",
+        "subtitle": "Learn to identify our three most common terns",
+        "section": "seabirds",
+        "species": [
+            "whfter1",
+            "blfter1",
+            "caster1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/641229265/1200"
+    },
+    {
+        "id": "penguins",
+        "title": "Penguins",
+        "subtitle": "The three resident penguins of mainland Aotearoa",
+        "section": "seabirds",
+        "species": [
+            "litpen1",
+            "yeepen1",
+            "fiopen1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600708/1200"
+    },
+    {
+        "id": "shags",
+        "title": "Mainland Shags",
+        "subtitle": "Cormorants found on mainland NZ",
+        "section": "seabirds",
+        "species": [
+            "piecor1",
+            "lipcor1",
+            "grecor",
+            "libcor1",
+            "sposha1",
+            "brosha1",
+            "rofsha1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/98175111/1200"
+    },
+    {
+        "id": "gulls",
+        "title": "Gulls",
+        "subtitle": "The three gull species of Aotearoa",
+        "section": "seabirds",
+        "species": [
+            "kelgul",
+            "silgul2",
+            "blbgul1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/608836577/1200"
+    },
+    {
         "id": "great_albatrosses",
         "title": "Great Albatrosses",
-        "subtitle": "The giants of the Southern Ocean",
+        "subtitle": "Giants of the Southern Ocean",
         "section": "seabirds",
         "species": [
             "royalb3",
@@ -41,9 +93,37 @@
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636592522/1200"
     },
     {
+        "id": "shearwaters",
+        "title": "Shearwaters",
+        "subtitle": "The most common shearwaters in our waters",
+        "section": "seabirds",
+        "species": [
+            "sooshe",
+            "flushe1",
+            "bulshe",
+            "flfshe"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/610719389/1200"
+    },
+    {
+        "id": "petrels",
+        "title": "Petrels",
+        "subtitle": "An essential mix of common NZ petrels",
+        "section": "seabirds",
+        "species": [
+            "cappet",
+            "coopet",
+            "norgip1",
+            "grwpet2",
+            "codpet1",
+            "wespet1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600828/1200"
+    },
+    {
         "id": "prions",
         "title": "Prions",
-        "subtitle": "Small blue-white petrels",
+        "subtitle": "Small, blue-white petrels",
         "section": "seabirds",
         "species": [
             "faipri1",
@@ -58,13 +138,13 @@
     {
         "id": "storm_petrels",
         "title": "Storm Petrels",
-        "subtitle": "Tiny tubenoses with fluttering flight",
+        "subtitle": "Tiny seabirds that dance on the water",
         "section": "seabirds",
         "species": [
             "wfspet",
             "gybstp1",
             "wispet",
-            "nezstp",
+            "nezstp1",
             "bbspet1",
             "wbspet1",
             "lcspet1"
@@ -74,7 +154,7 @@
     {
         "id": "skuas",
         "title": "Skuas",
-        "subtitle": "Powerful predatory seabirds",
+        "subtitle": "Pirates of the seabird world",
         "section": "seabirds",
         "species": [
             "brnsku3",
@@ -84,43 +164,6 @@
             "lotjae"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600769/1200"
-    },
-    {
-        "id": "fluttons",
-        "title": "Fluttons",
-        "subtitle": "Fluttering and Hutton's shearwaters, two similar coastal species",
-        "section": "seabirds-advanced",
-        "species": [
-            "flushe1",
-            "hutshe1"
-        ],
-        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/81829671/1200"
-    },
-    {
-        "id": "procellaria_and_friends",
-        "title": "Procellaria and Friends",
-        "subtitle": "Large, dark petrels",
-        "section": "seabirds-advanced",
-        "species": [
-            "whcpet1",
-            "wespet1",
-            "parpet1",
-            "grapet",
-            "flfshe",
-            "grwpet2"
-        ],
-        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635416674/1200"
-    },
-    {
-        "id": "sooty_and_short_tailed_shearwaters",
-        "title": "Sooty and Short-Tailed Shearwaters",
-        "subtitle": "NZ's most common seabird and its rarer Australian cousin",
-        "section": "seabirds-advanced",
-        "species": [
-            "sooshe",
-            "shtshe"
-        ],
-        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635498753/1200"
     },
     {
         "id": "crested_penguins",
@@ -139,9 +182,106 @@
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/427568301/1200"
     },
     {
+        "id": "wandering_albatrosses",
+        "title": "Wandering Albatrosses",
+        "subtitle": "Gibson's included with Antipodean but separation planned for future updates",
+        "section": "seabirds-advanced",
+        "species": [
+            "antalb1",
+            "wanalb1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635416654/1200"
+    },
+    {
+        "id": "jaegers",
+        "title": "Jaegers",
+        "subtitle": "Smaller holarctic skuas",
+        "section": "seabirds-advanced",
+        "species": [
+            "parjae",
+            "pomjae",
+            "lotjae"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/91081321/1200"
+    },
+    {
+        "id": "noddies",
+        "title": "Noddies",
+        "subtitle": "Reduce to brown and black noddy for more of a challenge",
+        "section": "seabirds-advanced",
+        "species": [
+            "brnnod",
+            "blknod",
+            "grynod1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/643265133/1200"
+    },
+    {
+        "id": "phoebetria",
+        "title": "Sooty albatrosses",
+        "subtitle": "Phoebetria: Light-mantled sooty albatross and sooty albatross",
+        "section": "seabirds-advanced",
+        "species": [
+            "sooalb1",
+            "limalb1" 
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635416656/1200"
+    },
+    {
+        "id": "subantarctic_shags",
+        "title": "Subantarctic Shags",
+        "subtitle": "Cormorants found in subantarctic NZ (incl. Chathams)",
+        "section": "seabirds-advanced",
+        "species": [
+            "chisha1",
+            "piisha1",
+            "boisha1",
+            "caisha2",
+            "auisha1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/636600723/1200"
+    },
+    {
+        "id": "fluttons",
+        "title": "Fluttons",
+        "subtitle": "Fluttering and Hutton's shearwaters",
+        "section": "seabirds-advanced",
+        "species": [
+            "flushe1",
+            "hutshe1"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/81829671/1200"
+    },
+    {
+        "id": "procellaria_and_friends",
+        "title": "Procellaria and Friends",
+        "subtitle": "Large, dark petrels that are easily confused at sea",
+        "section": "seabirds-advanced",
+        "species": [
+            "whcpet1",
+            "wespet1",
+            "parpet1",
+            "grapet",
+            "flfshe",
+            "grwpet2"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635416674/1200"
+    },
+    {
+        "id": "sooty_and_short_tailed_shearwaters",
+        "title": "Sooty and Short-Tailed Shearwaters",
+        "subtitle": "NZ's most common seabird and its vagrant Australian cousin",
+        "section": "seabirds-advanced",
+        "species": [
+            "sooshe",
+            "shtshe"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/635498753/1200"
+    },
+    {
         "id": "cookilaria",
         "title": "Cookilaria",
-        "subtitle": "A subgenus of pterodroma with several similar species",
+        "subtitle": "Reduce to Cook's and Pycroft's for more of a challenge",
         "section": "seabirds-advanced",
         "species": [
             "coopet",
@@ -151,5 +291,39 @@
             "motpet"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/631731220/1200"
+    },
+    {
+        "id": "antarctic_arctic_common_tern",
+        "title": "Antarctic, Arctic, Common terns",
+        "subtitle": "Easily confused vagrant terns",
+        "section": "seabirds-advanced",
+        "species": [
+            "antter1",
+            "arcter",
+            "comter"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/631583254/1200"
+    },
+    {
+        "id": "little_shearwaters",
+        "title": "Little Shearwaters",
+        "subtitle": "Small shearwaters: One sub-tropical, one sub-antarctic",
+        "section": "seabirds-advanced",
+        "species": [
+            "litshe8",
+            "litshe4"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/450873971/1200"
+    },
+    {
+        "id": "yellow_nosed_albatrosses",
+        "title": "Yellow-nosed Albatrosses",
+        "subtitle": "Two yellow-nosed mollymawks from beyond the Pacific",
+        "section": "seabirds-advanced",
+        "species": [
+            "yenalb3",
+            "yenalb2"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/627113087/1200"
     }
 ]
