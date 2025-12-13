@@ -146,6 +146,9 @@ function selectTemplate(templateId) {
       console.warn('Species name not found for code:', speciesCode);
     }
   });
+
+  // Scroll to the species selection section
+  document.getElementById('selectedSpecies').scrollIntoView({ behavior: 'smooth' });
 }
 
 /**
