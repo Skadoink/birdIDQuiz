@@ -360,15 +360,14 @@
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/627113087/1200"
     },
     {
-        "id": "shorebirds_begginer_basics",
+        "id": "shorebirds_beginner_basics",
         "title": "Beginner Basics",
         "subtitle": "The most common birds on our shores",
         "section": "shorebirds",
         "species": [
             "varoys1",
-            "soioys1",
+            "batgod",
             "piesti1",
-            "dobplo1",
             "rebdot1"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/111574031/1200"
@@ -421,6 +420,18 @@
             "runher1"
         ],
         "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/638608050/1200"
+    },
+    {
+        "id": "godwits",
+        "title": "Godwits",
+        "subtitle": "Long-billed Arctic migrants. An NZ icon",
+        "section": "shorebirds-advanced",
+        "species": [
+            "batgod",
+            "bktgod",
+            "hudgod"
+        ],
+        "image_url": "https://cdn.download.ams.birds.cornell.edu/api/v2/asset/111574061/1200"
     },
     {
         "id": "tattlers",
